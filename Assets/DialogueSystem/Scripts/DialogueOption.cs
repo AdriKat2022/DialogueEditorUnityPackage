@@ -2,22 +2,25 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class DialogueOption : MonoBehaviour
+namespace AdriKat.DialogueSystem.UI
 {
-    [SerializeField] private TextMeshProUGUI _optionText;
-
-    private int _id;
-    private Action<int> _callback;
-
-    public void InitializeOption(int id, string optionText, Action<int> callback)
+    public class DialogueOption : MonoBehaviour
     {
-        _id = id;
-        _optionText.text = optionText;
-        _callback = callback;
-    }
+        [SerializeField] private TextMeshProUGUI _optionText;
 
-    public void OnClick()
-    {
-        _callback?.Invoke(_id);
+        private int _id;
+        private Action<int> _callback;
+
+        public void InitializeOption(int id, string optionText, Action<int> callback)
+        {
+            _id = id;
+            _optionText.text = optionText;
+            _callback = callback;
+        }
+
+        public void OnClick()
+        {
+            _callback?.Invoke(_id);
+        }
     }
 }

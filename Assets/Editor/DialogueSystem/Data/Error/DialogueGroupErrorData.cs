@@ -1,13 +1,17 @@
+using AdriKat.Editor.DialogueSystem.Graph.Elements;
 using System.Collections.Generic;
 
-public class DialogueGroupErrorData
+namespace AdriKat.Editor.DialogueSystem.Graph
 {
-    public DialogueErrorData ErrorData { get; set; }
-    public List<DialogueGroup> Groups { get; set; }
-
-    public DialogueGroupErrorData()
+    public class DialogueGroupErrorData
     {
-        ErrorData = new DialogueErrorData();
-        Groups = new List<DialogueGroup>();
+        public DialogueErrorData ErrorData { get; set; }
+        public List<DialogueGroup> Groups { get; set; }
+
+        public DialogueGroupErrorData()
+        {
+            ErrorData = new DialogueErrorData();
+            Groups = new List<DialogueGroup>();
+        }
     }
 }

@@ -1,59 +1,63 @@
+using AdriKat.Editor.DialogueSystem.Graph.Elements;
 using System;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 
-public static class DialogueElementUtility
+namespace AdriKat.Editor.DialogueSystem.Utility
 {
-    public static Button CreateButton(string text, Action onClick = null)
+    public static class DialogueElementUtility
     {
-        Button button = new Button(onClick)
+        public static Button CreateButton(string text, Action onClick = null)
         {
-            text = text
-        };
+            Button button = new Button(onClick)
+            {
+                text = text
+            };
 
-        return button;
-    }
-
-    public static Foldout CreateFoldout(string title, bool collapsed = false)
-    {
-        Foldout foldout = new Foldout()
-        {
-            text = title,
-            value = !collapsed
-        };
-
-        return foldout;
-    }
-
-    public static Port CreatePort(this DialogueNode node, string portName = "", Orientation orientation = Orientation.Horizontal, Direction direction = Direction.Output, Port.Capacity capacity = Port.Capacity.Single)
-    {
-        Port port = node.InstantiatePort(orientation, direction, capacity, typeof(bool));
-        port.portName = portName;
-        return port;
-    }
-
-    public static TextField CreateTextField(string value = null, string label = null, EventCallback<ChangeEvent<string>> onValueChanged = null)
-    {
-        TextField textField = new TextField()
-        {
-            value = value,
-            label = label
-        };
-
-        if (onValueChanged != null)
-        {
-            textField.RegisterCallback(onValueChanged);
+            return button;
         }
 
-        return textField;
-    }
+        public static Foldout CreateFoldout(string title, bool collapsed = false)
+        {
+            Foldout foldout = new Foldout()
+            {
+                text = title,
+                value = !collapsed
+            };
 
-    public static TextField CreateTextArea(string value = null, string label = null, EventCallback<ChangeEvent<string>> onValueChanged = null)
-    {
-        TextField textArea = CreateTextField(value, label, onValueChanged);
+            return foldout;
+        }
 
-        textArea.multiline = true;
+        public static Port CreatePort(this DialogueNode node, string portName = "", Orientation orientation = Orientation.Horizontal, Direction direction = Direction.Output, Port.Capacity capacity = Port.Capacity.Single)
+        {
+            Port port = node.InstantiatePort(orientation, direction, capacity, typeof(bool));
+            port.portName = portName;
+            return port;
+        }
 
-        return textArea;
+        public static TextField CreateTextField(string value = null, string label = null, EventCallback<ChangeEvent<string>> onValueChanged = null)
+        {
+            TextField textField = new TextField()
+            {
+                value = value,
+                label = label
+            };
+
+            if (onValueChanged != null)
+            {
+                textField.RegisterCallback(onValueChanged);
+            }
+
+            return textField;
+        }
+
+        public static TextField CreateTextArea(string value = null, string label = null, EventCallback<ChangeEvent<string>> onValueChanged = null)
+        {
+            TextField textArea = CreateTextField(value, label, onValueChanged);
+
+            textArea.multiline = true;
+
+            return textArea;
+        }
     }
 }

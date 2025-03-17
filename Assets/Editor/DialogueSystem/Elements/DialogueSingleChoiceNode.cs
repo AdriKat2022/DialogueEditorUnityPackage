@@ -1,34 +1,40 @@
+using AdriKat.DialogueSystem.Enumerations;
+using AdriKat.Editor.DialogueSystem.Graph.Data;
+using AdriKat.Editor.DialogueSystem.Utility;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class DialogueSingleChoiceNode : DialogueNode
+namespace AdriKat.Editor.DialogueSystem.Graph.Elements
 {
-    public override void Initialize(string nodeName, DialogueGraphView graphView, Vector2 position)
+    public class DialogueSingleChoiceNode : DialogueNode
     {
-        base.Initialize(nodeName, graphView, position);
-
-        Type = DialogueType.SingleChoice;
-
-        DialogueChoiceSaveData choiceData = new()
+        public override void Initialize(string nodeName, DialogueGraphView graphView, Vector2 position)
         {
-            Text = "Next Dialogue",
-        };
+            base.Initialize(nodeName, graphView, position);
 
-        Choices.Add(choiceData);
-    }
+            Type = DialogueType.SingleChoice;
 
-    public override void Draw()
-    {
-        base.Draw();
+            DialogueChoiceSaveData choiceData = new()
+            {
+                Text = "Next Dialogue",
+            };
 
-        foreach (DialogueChoiceSaveData choice in Choices)
-        {
-            Port choicePort = this.CreatePort(choice.Text);
-            choicePort.userData = choice;
-            outputContainer.Add(choicePort);
+            Choices.Add(choiceData);
         }
 
-        RefreshExpandedState();
-    }
+        public override void Draw()
+        {
+            base.Draw();
 
+            foreach (DialogueChoiceSaveData choice in Choices)
+            {
+                Port choicePort = this.CreatePort(choice.Text);
+                choicePort.userData = choice;
+                outputContainer.Add(choicePort);
+            }
+
+            RefreshExpandedState();
+        }
+
+    }
 }

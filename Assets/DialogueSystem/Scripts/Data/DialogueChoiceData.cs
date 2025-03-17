@@ -1,10 +1,13 @@
 using System;
 using UnityEngine;
 
-[Serializable]
-public class DialogueChoiceData
+namespace AdriKat.DialogueSystem.Data
 {
-    [field: SerializeField] public string Text { get; set; }
-    [field: SerializeField] public DialogueSO NextDialogue { get; set; }
+    [Serializable]
+    public class DialogueChoiceData
+    {
+        [field: SerializeField] public string Text { get; set; }
+        [field: SerializeField] public DialogueSO NextDialogue { get; set; }
 
+    }
 }

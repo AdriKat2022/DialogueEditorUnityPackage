@@ -1,75 +1,78 @@
 using System.Collections.Generic;
 
-public static class DialogueVariables
+namespace AdriKat.DialogueSystem.Conditions
 {
-    private static readonly Dictionary<string, bool> _boolVariables = new();
-    private static readonly Dictionary<string, int> _intVariables = new();
-    private static readonly Dictionary<string, string> _stringVariables = new();
-
-    #region Booleans
-    public static bool? GetBool(string name)
+    public static class DialogueVariables
     {
-        return _boolVariables.TryGetValue(name, out bool value) ? value : null;
-    }
+        private static readonly Dictionary<string, bool> _boolVariables = new();
+        private static readonly Dictionary<string, int> _intVariables = new();
+        private static readonly Dictionary<string, string> _stringVariables = new();
 
-    public static void SetBool(string name, bool value)
-    {
-        _boolVariables[name] = value;
-    }
-    #endregion
-
-    #region Ints
-    public static int? GetInt(string name)
-    {
-        return _intVariables.TryGetValue(name, out int value) ? value : null;
-    }
-
-    public static void SetInt(string name, int value)
-    {
-        _intVariables[name] = value;
-    }
-    #endregion
-
-    #region Strings
-    public static string GetString(string name)
-    {
-        return _stringVariables.TryGetValue(name, out string value) ? value : null;
-    }
-
-    public static void SetString(string name, string value)
-    {
-        _stringVariables[name] = value;
-    }
-    #endregion
-
-    public static void ClearAllVariables()
-    {
-        _boolVariables.Clear();
-        _intVariables.Clear();
-    }
-
-    public static void SetDialogueVariablesNamesSO(ConditionVariableNamesSO dialogueVariablesNamesSO)
-    {
-        foreach (var variable in dialogueVariablesNamesSO.BoolVarNames)
+        #region Booleans
+        public static bool? GetBool(string name)
         {
-            SetBool(variable, false);
+            return _boolVariables.TryGetValue(name, out bool value) ? value : null;
         }
 
-        foreach (var variable in dialogueVariablesNamesSO.IntVarNames)
+        public static void SetBool(string name, bool value)
         {
-            SetInt(variable, 0);
+            _boolVariables[name] = value;
+        }
+        #endregion
+
+        #region Ints
+        public static int? GetInt(string name)
+        {
+            return _intVariables.TryGetValue(name, out int value) ? value : null;
         }
 
-        foreach (var variable in dialogueVariablesNamesSO.StringVarNames)
+        public static void SetInt(string name, int value)
         {
-            SetString(variable, string.Empty);
+            _intVariables[name] = value;
+        }
+        #endregion
+
+        #region Strings
+        public static string GetString(string name)
+        {
+            return _stringVariables.TryGetValue(name, out string value) ? value : null;
+        }
+
+        public static void SetString(string name, string value)
+        {
+            _stringVariables[name] = value;
+        }
+        #endregion
+
+        public static void ClearAllVariables()
+        {
+            _boolVariables.Clear();
+            _intVariables.Clear();
+        }
+
+        public static void SetDialogueVariablesNamesSO(ConditionVariableNamesSO dialogueVariablesNamesSO)
+        {
+            foreach (var variable in dialogueVariablesNamesSO.BoolVarNames)
+            {
+                SetBool(variable, false);
+            }
+
+            foreach (var variable in dialogueVariablesNamesSO.IntVarNames)
+            {
+                SetInt(variable, 0);
+            }
+
+            foreach (var variable in dialogueVariablesNamesSO.StringVarNames)
+            {
+                SetString(variable, string.Empty);
+            }
         }
     }
-}
 
-public enum DialogueVariableType
-{
-    Bool,
-    Int,
-    String
+    public enum DialogueVariableType
+    {
+        Bool,
+        Int,
+        String
+    }
 }

@@ -1,5 +1,8 @@
-public enum DialogueType
+namespace AdriKat.DialogueSystem.Enumerations
 {
-    SingleChoice,
-    MultipleChoice
+    public enum DialogueType
+    {
+        SingleChoice,
+        MultipleChoice
+    }
 }

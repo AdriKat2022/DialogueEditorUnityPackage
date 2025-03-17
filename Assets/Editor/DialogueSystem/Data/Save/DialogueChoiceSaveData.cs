@@ -1,9 +1,12 @@
 using System;
 using UnityEngine;
 
-[Serializable]
-public class DialogueChoiceSaveData
+namespace AdriKat.Editor.DialogueSystem.Graph.Data
 {
-    [field: SerializeField] public string Text { get; set; }
-    [field: SerializeField] public string NodeID { get; set; }
+    [Serializable]
+    public class DialogueChoiceSaveData
+    {
+        [field: SerializeField] public string Text { get; set; }
+        [field: SerializeField] public string NodeID { get; set; }
+    }
 }

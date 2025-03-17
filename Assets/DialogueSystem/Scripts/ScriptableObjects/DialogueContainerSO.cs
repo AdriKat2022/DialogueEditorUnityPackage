@@ -1,57 +1,61 @@
+using AdriKat.Editor.DialogueSystem.Utility;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueContainerSO : ScriptableObject
+namespace AdriKat.DialogueSystem.Data
 {
-    [field: SerializeField] public string FileName { get; set; }
-    [field: SerializeField] public SerializableDictionary<DialogueGroupSO, List<DialogueSO>> DialogueGroups { get; set; }
-    [field: SerializeField] public List<DialogueSO> UngroupedDialogues { get; set; }
-
-
-    public void Initialize(string fileName)
+    public class DialogueContainerSO : ScriptableObject
     {
-        FileName = fileName;
-        DialogueGroups = new SerializableDictionary<DialogueGroupSO, List<DialogueSO>>();
-        UngroupedDialogues = new List<DialogueSO>();
-    }
+        [field: SerializeField] public string FileName { get; set; }
+        [field: SerializeField] public SerializableDictionary<DialogueGroupSO, List<DialogueSO>> DialogueGroups { get; set; }
+        [field: SerializeField] public List<DialogueSO> UngroupedDialogues { get; set; }
 
-    public List<string> GetdialogueGroupNames()
-    {
-        List<string> groupNames = new();
-        foreach (var dialogueGroup in DialogueGroups.Keys)
+
+        public void Initialize(string fileName)
         {
-            groupNames.Add(dialogueGroup.GroupName);
+            FileName = fileName;
+            DialogueGroups = new SerializableDictionary<DialogueGroupSO, List<DialogueSO>>();
+            UngroupedDialogues = new List<DialogueSO>();
         }
-        return groupNames;
-    }
 
-    public List<string> GetGroupedDialogueNames(DialogueGroupSO dialogueGroup, bool startingDialoguesOnly)
-    {
-        List<string> dialogueNames = new();
-        foreach (var dialogue in DialogueGroups[dialogueGroup])
+        public List<string> GetdialogueGroupNames()
         {
-            if (startingDialoguesOnly && !dialogue.IsStartingDialogue)
+            List<string> groupNames = new();
+            foreach (var dialogueGroup in DialogueGroups.Keys)
             {
-                continue;
+                groupNames.Add(dialogueGroup.GroupName);
             }
-            dialogueNames.Add(dialogue.DialogueName);
+            return groupNames;
         }
-        return dialogueNames;
-    }
 
-    public List<string> GetUngroupedDialogueNames(bool startingDialoguesOnly)
-    {
-        List<string> dialogueNames = new();
-
-        foreach (var dialogue in UngroupedDialogues)
+        public List<string> GetGroupedDialogueNames(DialogueGroupSO dialogueGroup, bool startingDialoguesOnly)
         {
-            if (startingDialoguesOnly && !dialogue.IsStartingDialogue)
+            List<string> dialogueNames = new();
+            foreach (var dialogue in DialogueGroups[dialogueGroup])
             {
-                continue;
+                if (startingDialoguesOnly && !dialogue.IsStartingDialogue)
+                {
+                    continue;
+                }
+                dialogueNames.Add(dialogue.DialogueName);
             }
-            dialogueNames.Add(dialogue.DialogueName);
+            return dialogueNames;
         }
 
-        return dialogueNames;
+        public List<string> GetUngroupedDialogueNames(bool startingDialoguesOnly)
+        {
+            List<string> dialogueNames = new();
+
+            foreach (var dialogue in UngroupedDialogues)
+            {
+                if (startingDialoguesOnly && !dialogue.IsStartingDialogue)
+                {
+                    continue;
+                }
+                dialogueNames.Add(dialogue.DialogueName);
+            }
+
+            return dialogueNames;
+        }
     }
 }

@@ -2,35 +2,38 @@ using System;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class DialogueGroup : Group
+namespace AdriKat.Editor.DialogueSystem.Graph.Elements
 {
-    public string ID { get; set; }
-    public string OldTitle { get; set; }
-
-    private Color defaultBorderColor;
-    private float defaultBorderWidth;
-
-    public DialogueGroup(string groupTitle, Vector2 position)
+    public class DialogueGroup : Group
     {
-        ID = Guid.NewGuid().ToString();
-        title = groupTitle;
-        OldTitle = groupTitle;
+        public string ID { get; set; }
+        public string OldTitle { get; set; }
 
-        SetPosition(new Rect(position, Vector2.zero));
+        private Color defaultBorderColor;
+        private float defaultBorderWidth;
 
-        defaultBorderColor = contentContainer.style.borderBottomColor.value;
-        defaultBorderWidth = contentContainer.style.borderBottomWidth.value;
-    }
+        public DialogueGroup(string groupTitle, Vector2 position)
+        {
+            ID = Guid.NewGuid().ToString();
+            title = groupTitle;
+            OldTitle = groupTitle;
 
-    public void SetErrorStyle(Color color)
-    {
-        contentContainer.style.borderBottomColor = color;
-        contentContainer.style.borderBottomWidth = 2;
-    }
+            SetPosition(new Rect(position, Vector2.zero));
 
-    public void ResetStyle()
-    {
-        contentContainer.style.borderBottomColor = defaultBorderColor;
-        contentContainer.style.borderBottomWidth = defaultBorderWidth;
+            defaultBorderColor = contentContainer.style.borderBottomColor.value;
+            defaultBorderWidth = contentContainer.style.borderBottomWidth.value;
+        }
+
+        public void SetErrorStyle(Color color)
+        {
+            contentContainer.style.borderBottomColor = color;
+            contentContainer.style.borderBottomWidth = 2;
+        }
+
+        public void ResetStyle()
+        {
+            contentContainer.style.borderBottomColor = defaultBorderColor;
+            contentContainer.style.borderBottomWidth = defaultBorderWidth;
+        }
     }
 }

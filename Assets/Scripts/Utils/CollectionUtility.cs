@@ -1,15 +1,18 @@
 using System.Collections.Generic;
 
-public static class CollectionUtility
+namespace AdriKat.Editor.DialogueSystem.Utility
 {
-    public static void AddItem<K, V>(this SerializableDictionary<K, List<V>> serializableDictionnary, K key, V value)
+    public static class CollectionUtility
     {
-        if (serializableDictionnary.ContainsKey(key))
+        public static void AddItem<K, V>(this SerializableDictionary<K, List<V>> serializableDictionnary, K key, V value)
         {
-            serializableDictionnary[key].Add(value);
-            return;
-        }
+            if (serializableDictionnary.ContainsKey(key))
+            {
+                serializableDictionnary[key].Add(value);
+                return;
+            }
 
-        serializableDictionnary.Add(key, new List<V> { value });
+            serializableDictionnary.Add(key, new List<V> { value });
+        }
     }
 }

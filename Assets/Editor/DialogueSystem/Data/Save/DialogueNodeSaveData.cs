@@ -1,14 +1,18 @@
+using AdriKat.DialogueSystem.Enumerations;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class DialogueNodeSaveData
+namespace AdriKat.Editor.DialogueSystem.Graph.Data
 {
-    [field: SerializeField] public string ID { get; set; }
-    [field: SerializeField] public string Name { get; set; }
-    [field: SerializeField] public string Text { get; set; }
-    [field: SerializeField] public List<DialogueChoiceSaveData> Choices { get; set; }
-    [field: SerializeField] public string GroupID { get; set; }
-    [field: SerializeField] public DialogueType Type { get; set; }
-    [field: SerializeField] public Vector2 Position { get; set; }
+    [System.Serializable]
+    public class DialogueNodeSaveData
+    {
+        [field: SerializeField] public string ID { get; set; }
+        [field: SerializeField] public string Name { get; set; }
+        [field: SerializeField] public string Text { get; set; }
+        [field: SerializeField] public List<DialogueChoiceSaveData> Choices { get; set; }
+        [field: SerializeField] public string GroupID { get; set; }
+        [field: SerializeField] public DialogueType Type { get; set; }
+        [field: SerializeField] public Vector2 Position { get; set; }
+    }
 }

@@ -1,26 +1,30 @@
 using UnityEditor;
 using UnityEngine.UIElements;
 
-public static class DialogueStyleUtility
+
+namespace AdriKat.Editor.DialogueSystem.Utility
 {
-    public static VisualElement AddStyleSheets(this VisualElement element, params string[] styleSheetNames)
+    public static class DialogueStyleUtility
     {
-        foreach (string styleSheetName in styleSheetNames)
+        public static VisualElement AddStyleSheets(this VisualElement element, params string[] styleSheetNames)
         {
-            StyleSheet styleSheet = (StyleSheet)EditorGUIUtility.Load(styleSheetName);
-            element.styleSheets.Add(styleSheet);
+            foreach (string styleSheetName in styleSheetNames)
+            {
+                StyleSheet styleSheet = (StyleSheet)EditorGUIUtility.Load(styleSheetName);
+                element.styleSheets.Add(styleSheet);
+            }
+
+            return element;
         }
 
-        return element;
-    }
-
-    public static VisualElement AddClasses(this VisualElement element, params string[] classNames)
-    {
-        foreach (string className in classNames)
+        public static VisualElement AddClasses(this VisualElement element, params string[] classNames)
         {
-            element.AddToClassList(className);
-        }
+            foreach (string className in classNames)
+            {
+                element.AddToClassList(className);
+            }
 
-        return element;
+            return element;
+        }
     }
 }

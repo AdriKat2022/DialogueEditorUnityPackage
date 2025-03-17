@@ -1,21 +1,24 @@
 using UnityEngine;
 
-public class DialogueErrorData
+namespace AdriKat.Editor.DialogueSystem.Graph
 {
-    public Color Color { get; set; }
-
-    public DialogueErrorData()
+    public class DialogueErrorData
     {
-        GenerateRandomColor();
-    }
+        public Color Color { get; set; }
 
-    private void GenerateRandomColor()
-    {
-        Color = new Color32(
-            (byte)Random.Range(65, 255),
-            (byte)Random.Range(50, 176),
-            (byte)Random.Range(50, 176),
-            255
-        );
+        public DialogueErrorData()
+        {
+            GenerateRandomColor();
+        }
+
+        private void GenerateRandomColor()
+        {
+            Color = new Color32(
+                (byte)Random.Range(65, 255),
+                (byte)Random.Range(50, 176),
+                (byte)Random.Range(50, 176),
+                255
+            );
+        }
     }
 }
