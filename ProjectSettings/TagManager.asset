@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Walls
+  - Player
+  - Interaction
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2386112613
+    locked: 0
+  - name: Obstacles
+    uniqueID: 3069969647
+    locked: 0
+  - name: World
+    uniqueID: 3156434881
+    locked: 0
+  - name: Enemies
+    uniqueID: 1163411295
+    locked: 0
+  - name: Player
+    uniqueID: 783891377
+    locked: 0
+  - name: ElevatedWorld
+    uniqueID: 1554677279
+    locked: 0
+  - name: Particles
+    uniqueID: 2894968479
+    locked: 0
+  - name: UI
+    uniqueID: 3474068425
+    locked: 0
+  m_RenderingLayers:
+  - Default
