@@ -15,10 +15,12 @@ MonoBehaviour:
   <BoolVarNames>k__BackingField:
   - isPlayerDead
   - hasPlayerWon
+  - isChestOpen
   <IntVarNames>k__BackingField:
   - npcSlayed
   - kills
   - coins
   - pets
+  - swordInteractions
   <StringVarNames>k__BackingField:
   - playerName

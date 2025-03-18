@@ -248,7 +248,7 @@ namespace AdriKat.DialogueSystem.Utility
                     null,
                     node.IsStartingNode()
                 );
-
+                dialogue.DialogueName = conditionalBranchNode.DialogueName;
                 dialogue.DialogueVariableNames = conditionalBranchNode.DialogueVariableNames;
             }
 
