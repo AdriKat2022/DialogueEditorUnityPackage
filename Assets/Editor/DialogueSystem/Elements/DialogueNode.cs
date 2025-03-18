@@ -22,6 +22,7 @@ namespace AdriKat.DialogueSystem.Elements
 
         protected DialogueGraphView graphView;
         private Color defaultBackgroundColor;
+        protected bool showDialogueTextContents = true;
 
         public virtual void Initialize(string nodeName, DialogueGraphView graphView, Vector2 position)
         {
@@ -102,8 +103,15 @@ namespace AdriKat.DialogueSystem.Elements
 
 
             // Extensions container
+            if (showDialogueTextContents)
+            {
+                DrawDialogueText();
+            }
+        }
 
-            VisualElement customDataContainer = new VisualElement();
+        private void DrawDialogueText()
+        {
+            VisualElement customDataContainer = new();
 
             customDataContainer.AddToClassList("ds-node__custom-data-container");
 

@@ -75,4 +75,30 @@ namespace AdriKat.DialogueSystem.Variables
         Int,
         String
     }
+    public enum BoolComparisonType
+    {
+        Is,
+        And,
+        Or,
+        Xor
+    }
+
+    public enum IntComparisonType
+    {
+        Equal,
+        NotEqual,
+        Greater,
+        GreaterOrEqual,
+        Less,
+        LessOrEqual
+    }
+
+    public enum StringComparisonType
+    {
+        Equal,
+        NotEqual,
+        Contains,
+        StartsWith,
+        EndsWith
+    }
 }

@@ -27,10 +27,12 @@ namespace AdriKat.DialogueSystem.Elements
         {
             base.Draw();
 
+
             foreach (DialogueChoiceSaveData choice in Choices)
             {
                 Port choicePort = this.CreatePort(choice.Text);
                 choicePort.userData = choice;
+                //Debug.Log($"Drawing! ({choicePort.userData})");
                 outputContainer.Add(choicePort);
             }
 

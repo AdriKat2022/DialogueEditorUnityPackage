@@ -81,9 +81,9 @@ namespace AdriKat.DialogueSystem.Graph
             this.AddManipulator(new ContentDragger());
             this.AddManipulator(new SelectionDragger());
             this.AddManipulator(new RectangleSelector());
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Single Choice)", DialogueType.SingleChoice));
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Multiple Choice)", DialogueType.MultipleChoice));
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Conditional Branch)", DialogueType.ConditionalBranch));
+            this.AddManipulator(CreateNodeContextualMenu("Add Single Choice Node", DialogueType.SingleChoice));
+            this.AddManipulator(CreateNodeContextualMenu("Add Multiple Choice Node", DialogueType.MultipleChoice));
+            this.AddManipulator(CreateNodeContextualMenu("Add Conditional Branch Node", DialogueType.ConditionalBranch));
             this.AddManipulator(CreateGroupContextualMenu());
         }
         #endregion
@@ -93,7 +93,7 @@ namespace AdriKat.DialogueSystem.Graph
         {
             ContextualMenuManipulator contextualMenu = new ContextualMenuManipulator((evt) =>
                 {
-                    evt.menu.AppendAction(actionTitle, (e) => AddElement(CreateNode("DialogueName", dialogueType, e.eventInfo.localMousePosition)));
+                    evt.menu.AppendAction(actionTitle, (e) => AddElement(CreateNode($"New{dialogueType}", dialogueType, e.eventInfo.localMousePosition)));
                 });
             return contextualMenu;
         }
@@ -473,17 +473,32 @@ namespace AdriKat.DialogueSystem.Graph
                 {
                     foreach (Edge edge in changes.edgesToCreate)
                     {
-                        DialogueNode nextNode = edge.input.node as DialogueNode;
+                        DialogueNode outputNode = edge.output.node as DialogueNode;
+                        DialogueNode inputNode = edge.input.node as DialogueNode;
 
-                        if (edge.output.userData is DialogueChoiceSaveData choiceSaveData)
+                        if (outputNode is DialogueConditionalBranchNode conditionalBranchNode)
                         {
-                            DialogueChoiceSaveData choiceData = edge.output.userData as DialogueChoiceSaveData;
-                            choiceData.NodeID = nextNode.ID;
+                            // Check if the edge is coming from the TRUE or FALSE port
+                            if (edge.output.portName == "True")
+                            {
+                                conditionalBranchNode.NodeOnTrue = inputNode.ID;
+                                //Debug.Log($"Connected TRUE branch of {conditionalBranchNode.ID} to {inputNode.ID}");
+                            }
+                            else if (edge.output.portName == "False")
+                            {
+                                conditionalBranchNode.NodeOnFalse = inputNode.ID;
+                                //Debug.Log($"Connected FALSE branch of {conditionalBranchNode.ID} to {inputNode.ID}");
+                            }
                         }
-                        else if (edge.output.userData is string conditionSaveData)
+                        else if (edge.output.userData is DialogueChoiceSaveData choiceSaveData)
                         {
-                            edge.output.userData = conditionSaveData;
+                            choiceSaveData.NodeID = inputNode.ID;
                         }
+                        else
+                        {
+                            edge.output.userData = inputNode.ID;
+                        }
+
                         edge.input.Connect(edge);
                     }
                 }
@@ -494,15 +509,29 @@ namespace AdriKat.DialogueSystem.Graph
 
                     foreach (GraphElement element in changes.elementsToRemove)
                     {
-                        if (element.GetType() == edgeType)
+                        if (element is Edge edge)
                         {
-                            Edge edge = (Edge)element;
+                            DialogueNode outputNode = edge.output.node as DialogueNode;
+                            DialogueNode inputNode = edge.input.node as DialogueNode;
 
-                            if (edge.output.userData is DialogueChoiceSaveData choiceData)
+                            if (outputNode is DialogueConditionalBranchNode conditionalBranchNode)
+                            {
+                                if (edge.output.portName == "True" && conditionalBranchNode.NodeOnTrue == inputNode.ID)
+                                {
+                                    conditionalBranchNode.NodeOnTrue = null;
+                                    //Debug.Log($"Disconnected TRUE branch of {conditionalBranchNode.ID} from {inputNode.ID}");
+                                }
+                                else if (edge.output.portName == "False" && conditionalBranchNode.NodeOnFalse == inputNode.ID)
+                                {
+                                    conditionalBranchNode.NodeOnFalse = null;
+                                    //Debug.Log($"Disconnected FALSE branch of {conditionalBranchNode.ID} from {inputNode.ID}");
+                                }
+                            }
+                            else if (edge.output.userData is DialogueChoiceSaveData choiceData)
                             {
                                 choiceData.NodeID = "";
                             }
-                            else if (edge.output.userData is string conditionData)
+                            else if (edge.output.userData is string)
                             {
                                 edge.output.userData = "";
                             }
