@@ -182,18 +182,26 @@ namespace AdriKat.DialogueSystem.Utility
 
         private static void SaveNodeToGraph(DialogueNode node, DialogueGraphSaveDataSO graphData)
         {
-            List<DialogueChoiceSaveData> choices = CloneNodeChoices(node.Choices);
-
             DialogueNodeSaveData nodeSaveData = new()
             {
                 ID = node.ID,
                 Name = node.DialogueName,
-                Choices = choices,
+                Choices = CloneChoices(node.Choices),
                 Text = node.DialogueText,
                 Type = node.Type,
                 GroupID = node.Group?.ID,
                 Position = node.GetPosition().position
             };
+
+            if (node is DialogueConditionalBranchNode conditionalBranchNode)
+            {
+                nodeSaveData.DialogueVariableNames = conditionalBranchNode.DialogueVariableNames;
+                nodeSaveData.Conditions = CloneConditions(conditionalBranchNode.Conditions);
+                nodeSaveData.ConditionsToBeMet = conditionalBranchNode.ConditionToBeMet;
+                nodeSaveData.NodeIDOnTrue = conditionalBranchNode.NodeOnTrue;
+                nodeSaveData.NodeIDOnFalse = conditionalBranchNode.NodeOnFalse;
+                Debug.Log($"Saving to graph with: true: {nodeSaveData.NodeIDOnTrue}/false: {nodeSaveData.NodeIDOnFalse}");
+            }
 
             graphData.Nodes.Add(nodeSaveData);
         }
@@ -226,7 +234,6 @@ namespace AdriKat.DialogueSystem.Utility
             createdDialogues.Add(node.ID, dialogue);
         }
 
-
         private static void SaveConditionalNodeToScriptableObject(DialogueNode node, DialogueContainerSO dialogueContainer)
         {
             DialogueConditionalBranchSO dialogue = SaveDialogue<DialogueConditionalBranchSO>(node, dialogueContainer);
@@ -235,12 +242,14 @@ namespace AdriKat.DialogueSystem.Utility
             if (node is DialogueConditionalBranchNode conditionalBranchNode)
             {
                 dialogue.Initialize(
-                    conditionalBranchNode.Conditions,
+                    CloneConditions(conditionalBranchNode.Conditions),
                     conditionalBranchNode.ConditionToBeMet,
                     null,
                     null,
                     node.IsStartingNode()
                 );
+
+                dialogue.DialogueVariableNames = conditionalBranchNode.DialogueVariableNames;
             }
 
             createdDialogues.Add(node.ID, dialogue);
@@ -268,18 +277,25 @@ namespace AdriKat.DialogueSystem.Utility
             {
                 DialogueSO dialogue = createdDialogues[node.ID];
 
+                Debug.Log(node.ID);
+
                 if (dialogue is DialogueConditionalBranchSO conditionalBranchSO)
                 {
                     DialogueConditionalBranchNode conditionalBranchNode = node as DialogueConditionalBranchNode;
 
+                    Debug.Log($"Node on true: {conditionalBranchNode.NodeOnTrue}");
                     if (!string.IsNullOrEmpty(conditionalBranchNode.NodeOnTrue))
                     {
                         conditionalBranchSO.DialogueOnTrue = createdDialogues[conditionalBranchNode.NodeOnTrue];
                     }
+
+                    Debug.Log($"Node on false: {conditionalBranchNode.NodeOnTrue}");
                     if (!string.IsNullOrEmpty(conditionalBranchNode.NodeOnFalse))
                     {
                         conditionalBranchSO.DialogueOnFalse = createdDialogues[conditionalBranchNode.NodeOnFalse];
                     }
+
+                    conditionalBranchSO.DialogueVariableNames = conditionalBranchNode.DialogueVariableNames;
 
                     SaveAsset(dialogue);
                 }
@@ -332,11 +348,11 @@ namespace AdriKat.DialogueSystem.Utility
         {
             foreach (KeyValuePair<string, DialogueNode> loadedNode in loadedNodes)
             {
-                foreach (Port choicePort in loadedNode.Value.outputContainer.Children())
+                foreach (Port port in loadedNode.Value.outputContainer.Children())
                 {
                     Port nexNodeInputPort;
 
-                    if (choicePort.userData is DialogueChoiceSaveData choiceData)
+                    if (port.userData is DialogueChoiceSaveData choiceData)
                     {
                         if (string.IsNullOrEmpty(choiceData.NodeID))
                         {
@@ -346,22 +362,28 @@ namespace AdriKat.DialogueSystem.Utility
                         DialogueNode nextNode = loadedNodes[choiceData.NodeID];
                         nexNodeInputPort = nextNode.inputContainer.Children().First() as Port;
                     }
-                    else if (choicePort.userData is string dialogueId)
+                    else if (port.userData is string dialogueId)
                     {
+                        if (string.IsNullOrEmpty(dialogueId))
+                        {
+                            continue;
+                        }
+
+                        Debug.Log($"Linking conditional branch node ({dialogueId})");
                         DialogueNode nextNode = loadedNodes[dialogueId];
                         nexNodeInputPort = nextNode.inputContainer.Children().First() as Port;
                     }
-                    else if (choicePort.userData == null)
+                    else if (port.userData == null)
                     {
                         continue;
                     }
                     else
                     {
-                        Debug.LogError($"Error: Unable to load node connections. UserData of port unrecognized: {choicePort.userData}");
+                        Debug.LogError($"Error: Unable to load node connections. UserData of port unrecognized: {port.userData}");
                         continue;
                     }
 
-                    Edge edge = choicePort.ConnectTo(nexNodeInputPort);
+                    Edge edge = port.ConnectTo(nexNodeInputPort);
                     graphView.AddElement(edge);
                     loadedNode.Value.RefreshPorts();
                 }
@@ -381,8 +403,20 @@ namespace AdriKat.DialogueSystem.Utility
                 DialogueNode node = graphView.CreateNode(nodeData.Name, nodeData.Type, nodeData.Position, false);
 
                 node.ID = nodeData.ID;
-                node.Choices = CloneNodeChoices(nodeData.Choices);
-                node.DialogueText = nodeData.Text;
+
+                if (node is DialogueConditionalBranchNode conditionalBranchNode)
+                {
+                    conditionalBranchNode.DialogueVariableNames = nodeData.DialogueVariableNames;
+                    conditionalBranchNode.Conditions = CloneConditions(nodeData.Conditions);
+                    conditionalBranchNode.ConditionToBeMet = nodeData.ConditionsToBeMet;
+                    conditionalBranchNode.NodeOnTrue = nodeData.NodeIDOnTrue;
+                    conditionalBranchNode.NodeOnFalse = nodeData.NodeIDOnFalse;
+                }
+                else if (node is DialogueNode executableNode)
+                {
+                    executableNode.Choices = CloneChoices(nodeData.Choices);
+                    executableNode.DialogueText = nodeData.Text;
+                }
 
                 node.Draw();
                 graphView.AddElement(node);
@@ -523,27 +557,57 @@ namespace AdriKat.DialogueSystem.Utility
             return AssetDatabase.LoadAssetAtPath<T>($"{path}/{assetName}.asset");
         }
 
-        private static List<DialogueChoiceSaveData> CloneNodeChoices(List<DialogueChoiceSaveData> choices)
+        private static List<DialogueChoiceSaveData> CloneChoices(List<DialogueChoiceSaveData> list)
         {
-            if (choices == null)
+            if (list == null)
             {
                 Debug.LogError("Error: Unable to copy choices. Choices is null.");
                 return new List<DialogueChoiceSaveData>();
             }
 
-            List<DialogueChoiceSaveData> clonedChoices = new();
+            List<DialogueChoiceSaveData> clonedElements = new();
 
             // Copy choices to avoid reference issues (the serialized object need to be updated only when saving the graph)
-            foreach (DialogueChoiceSaveData choice in choices)
+            foreach (var choice in list)
             {
-                clonedChoices.Add(new DialogueChoiceSaveData
+                clonedElements.Add(new DialogueChoiceSaveData
                 {
                     Text = choice.Text,
                     NodeID = choice.NodeID
                 });
             }
 
-            return clonedChoices;
+            return clonedElements;
+        }
+
+        private static List<DialogueConditionData> CloneConditions(List<DialogueConditionData> list)
+        {
+            if (list == null)
+            {
+                Debug.LogError("Error: Unable to copy choices. Choices is null.");
+                return new List<DialogueConditionData>();
+            }
+
+            List<DialogueConditionData> clonedElements = new();
+
+            // Copy choices to avoid reference issues (the serialized object need to be updated only when saving the graph)
+            foreach (var condition in list)
+            {
+                clonedElements.Add(new DialogueConditionData
+                {
+                    DialogueVariablesNamesSO = condition.DialogueVariablesNamesSO,
+                    ConditionValueType = condition.ConditionValueType,
+                    Key = condition.Key,
+                    BoolComparisonType = condition.BoolComparisonType,
+                    BoolValue = condition.BoolValue,
+                    IntComparisonType = condition.IntComparisonType,
+                    IntValue = condition.IntValue,
+                    StringComparisonType = condition.StringComparisonType,
+                    StringValue = condition.StringValue
+                });
+            }
+
+            return clonedElements;
         }
         #endregion
     }

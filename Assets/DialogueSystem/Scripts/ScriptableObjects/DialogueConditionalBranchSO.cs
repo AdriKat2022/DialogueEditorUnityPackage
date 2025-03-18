@@ -6,6 +6,7 @@ namespace AdriKat.DialogueSystem.Data
 {
     public class DialogueConditionalBranchSO : DialogueSO
     {
+        [field: SerializeField] public DialogueVariableNamesSO DialogueVariableNames { get; set; }
         [field: SerializeField] public List<DialogueConditionData> Conditions { get; set; }
         [field: SerializeField] public ConditionType ConditionsToBeMet { get; set; }
         [field: SerializeField] public DialogueSO DialogueOnTrue { get; set; }

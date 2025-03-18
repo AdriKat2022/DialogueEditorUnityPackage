@@ -11,16 +11,15 @@ namespace AdriKat.DialogueSystem.Data
 
         [field: SerializeField] public DialogueVariableType ConditionValueType { get; set; }
         [field: Space]
-        [field: SerializeField] public string BoolKey { get; set; }
-        [field: SerializeField] public BoolComparisonTypeEnum BoolComparisonType { get; set; }
+        [field: SerializeField] public string Key { get; set; }
+
+        [field: SerializeField] public BoolComparisonType BoolComparisonType { get; set; }
         [field: SerializeField] public bool BoolValue { get; set; }
         [field: Space]
-        [field: SerializeField] public string IntKey { get; set; }
-        [field: SerializeField] public IntComparisonTypeEnum IntComparisonType { get; set; }
+        [field: SerializeField] public IntComparisonType IntComparisonType { get; set; }
         [field: SerializeField] public int IntValue { get; set; }
         [field: Space]
-        [field: SerializeField] public string StringKey { get; set; }
-        [field: SerializeField] public StringComparisonTypeEnum StringComparisonType { get; set; }
+        [field: SerializeField] public StringComparisonType StringComparisonType { get; set; }
         [field: SerializeField] public string StringValue { get; set; }
 
         public bool Evaluate()
@@ -28,103 +27,66 @@ namespace AdriKat.DialogueSystem.Data
             switch (ConditionValueType)
             {
                 case DialogueVariableType.Bool:
-                    bool? value = DialogueVariables.GetBool(BoolKey);
+                    bool? value = DialogueVariables.GetBool(Key);
 
                     if (value != null)
                     {
                         // Swtich return according to the bool comparison
                         return BoolComparisonType switch
                         {
-                            BoolComparisonTypeEnum.Is => (bool)value == BoolValue,
-                            BoolComparisonTypeEnum.And => (bool)value && BoolValue,
-                            BoolComparisonTypeEnum.Or => (bool)value || BoolValue,
-                            BoolComparisonTypeEnum.Xor => (bool)value ^ BoolValue,
+                            BoolComparisonType.Is => (bool)value == BoolValue,
+                            BoolComparisonType.And => (bool)value && BoolValue,
+                            BoolComparisonType.Or => (bool)value || BoolValue,
+                            BoolComparisonType.Xor => (bool)value ^ BoolValue,
                             _ => false
                         };
                     }
 
-                    Debug.LogError($"Bool variable with key '{BoolKey}' not found.");
+                    Debug.LogError($"Bool variable with key '{Key}' not found.");
                     break;
 
                 case DialogueVariableType.Int:
-                    int? intValue = DialogueVariables.GetInt(IntKey);
+                    int? intValue = DialogueVariables.GetInt(Key);
 
                     if (intValue != null)
                     {
                         // Swtich return according to the int comparison
                         return IntComparisonType switch
                         {
-                            IntComparisonTypeEnum.Equal => intValue == IntValue,
-                            IntComparisonTypeEnum.NotEqual => intValue != IntValue,
-                            IntComparisonTypeEnum.Greater => intValue > IntValue,
-                            IntComparisonTypeEnum.GreaterOrEqual => intValue >= IntValue,
-                            IntComparisonTypeEnum.Less => intValue < IntValue,
-                            IntComparisonTypeEnum.LessOrEqual => intValue <= IntValue,
+                            IntComparisonType.Equal => intValue == IntValue,
+                            IntComparisonType.NotEqual => intValue != IntValue,
+                            IntComparisonType.Greater => intValue > IntValue,
+                            IntComparisonType.GreaterOrEqual => intValue >= IntValue,
+                            IntComparisonType.Less => intValue < IntValue,
+                            IntComparisonType.LessOrEqual => intValue <= IntValue,
                             _ => false
                         };
                     }
 
-                    Debug.LogError($"Int variable with key '{IntKey}' not found.");
+                    Debug.LogError($"Int variable with key '{Key}' not found.");
                     break;
 
                 case DialogueVariableType.String:
-                    string stringValue = DialogueVariables.GetString(StringKey);
+                    string stringValue = DialogueVariables.GetString(Key);
 
                     if (stringValue != null)
                     {
                         return StringComparisonType switch
                         {
-                            StringComparisonTypeEnum.Equal => stringValue == StringValue,
-                            StringComparisonTypeEnum.NotEqual => stringValue != StringValue,
-                            StringComparisonTypeEnum.Contains => stringValue.Contains(StringValue),
-                            StringComparisonTypeEnum.StartsWith => stringValue.StartsWith(StringValue),
-                            StringComparisonTypeEnum.EndsWith => stringValue.EndsWith(StringValue),
+                            StringComparisonType.Equal => stringValue == StringValue,
+                            StringComparisonType.NotEqual => stringValue != StringValue,
+                            StringComparisonType.Contains => stringValue.Contains(StringValue),
+                            StringComparisonType.StartsWith => stringValue.StartsWith(StringValue),
+                            StringComparisonType.EndsWith => stringValue.EndsWith(StringValue),
                             _ => false
                         };
                     }
 
-                    Debug.LogError($"String variable with key '{StringKey}' not found.");
+                    Debug.LogError($"String variable with key '{Key}' not found.");
                     break;
             }
 
             return false;
         }
-
-        #region Enums
-        public enum DialogueVariableType
-        {
-            Bool,
-            Int,
-            String
-        }
-
-
-        public enum BoolComparisonTypeEnum
-        {
-            Is,
-            And,
-            Or,
-            Xor
-        }
-
-        public enum IntComparisonTypeEnum
-        {
-            Equal,
-            NotEqual,
-            Greater,
-            GreaterOrEqual,
-            Less,
-            LessOrEqual
-        }
-
-        public enum StringComparisonTypeEnum
-        {
-            Equal,
-            NotEqual,
-            Contains,
-            StartsWith,
-            EndsWith
-        }
-        #endregion
     }
 }
