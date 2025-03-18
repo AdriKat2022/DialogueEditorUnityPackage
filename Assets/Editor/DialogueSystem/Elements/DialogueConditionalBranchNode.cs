@@ -3,6 +3,7 @@ using AdriKat.DialogueSystem.Enumerations;
 using AdriKat.DialogueSystem.Graph;
 using AdriKat.DialogueSystem.Utility;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -27,39 +28,48 @@ namespace AdriKat.DialogueSystem.Elements
         {
             base.Draw();
 
+            Foldout conditionsFoldout = DialogueElementUtility.CreateFoldout("Conditions");
+            conditionsFoldout.AddToClassList("ds-node__foldout");
+            mainContainer.Insert(1, conditionsFoldout);
+
             // Main Container
             Button addConditionButton = DialogueElementUtility.CreateButton("Add Condition", () =>
             {
                 DialogueConditionData conditionData = new();
 
-                VisualElement choicePort = CreateCondition(conditionData);
-                outputContainer.Add(choicePort);
+                CreateCondition(conditionData, conditionsFoldout);
             });
             addConditionButton.AddToClassList("ds-node__button");
             mainContainer.Insert(1, addConditionButton);
 
-            // Output Container
-            foreach (DialogueChoiceSaveData choice in Choices)
-            {
-                VisualElement choicePort = CreateCondition(choice);
-                outputContainer.Add(choicePort);
-            }
+            // Output Container, make two ports for true and false
+            Port truePort = this.CreatePort("True", Orientation.Horizontal, Direction.Output);
+            truePort.portName = "True";
+            truePort.userData = NodeOnTrue;
+            outputContainer.Add(truePort);
+
+            Port falsePort = this.CreatePort("False", Orientation.Horizontal, Direction.Output);
+            falsePort.portName = "False";
+            falsePort.userData = NodeOnFalse;
+            outputContainer.Add(falsePort);
+
+
             RefreshExpandedState();
         }
 
-        private VisualElement CreateCondition(object userData)
+        private VisualElement CreateCondition(DialogueConditionData conditionalData, Foldout conditionsContainer)
         {
             VisualElement condtitionContainer = new();
-            DialogueConditionData conditionalData = (DialogueConditionData)userData;
 
             Button deleteButton = DialogueElementUtility.CreateButton("X", () =>
             {
-                if (Conditions.Count == 1)
+                if (Conditions.Count < 1)
                 {
                     return;
                 }
 
                 Conditions.Remove(conditionalData);
+                conditionsContainer.Remove(condtitionContainer);
             });
 
             deleteButton.AddToClassList("ds-node__button");
@@ -70,9 +80,9 @@ namespace AdriKat.DialogueSystem.Elements
             // - ConditionOperator
             // - ConditionValue
 
+            Conditions.Add(conditionalData);
             condtitionContainer.Add(deleteButton);
-
-            outputContainer.Add(condtitionContainer);
+            conditionsContainer.Add(condtitionContainer);
 
             return condtitionContainer;
         }

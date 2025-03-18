@@ -334,14 +334,32 @@ namespace AdriKat.DialogueSystem.Utility
             {
                 foreach (Port choicePort in loadedNode.Value.outputContainer.Children())
                 {
-                    DialogueChoiceSaveData choiceData = (DialogueChoiceSaveData)choicePort.userData;
-                    if (string.IsNullOrEmpty(choiceData.NodeID))
+                    Port nexNodeInputPort;
+
+                    if (choicePort.userData is DialogueChoiceSaveData choiceData)
+                    {
+                        if (string.IsNullOrEmpty(choiceData.NodeID))
+                        {
+                            continue;
+                        }
+
+                        DialogueNode nextNode = loadedNodes[choiceData.NodeID];
+                        nexNodeInputPort = nextNode.inputContainer.Children().First() as Port;
+                    }
+                    else if (choicePort.userData is string dialogueId)
+                    {
+                        DialogueNode nextNode = loadedNodes[dialogueId];
+                        nexNodeInputPort = nextNode.inputContainer.Children().First() as Port;
+                    }
+                    else if (choicePort.userData == null)
                     {
                         continue;
                     }
-
-                    DialogueNode nextNode = loadedNodes[choiceData.NodeID];
-                    Port nexNodeInputPort = nextNode.inputContainer.Children().First() as Port;
+                    else
+                    {
+                        Debug.LogError($"Error: Unable to load node connections. UserData of port unrecognized: {choicePort.userData}");
+                        continue;
+                    }
 
                     Edge edge = choicePort.ConnectTo(nexNodeInputPort);
                     graphView.AddElement(edge);

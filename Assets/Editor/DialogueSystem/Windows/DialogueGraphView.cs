@@ -474,8 +474,16 @@ namespace AdriKat.DialogueSystem.Graph
                     foreach (Edge edge in changes.edgesToCreate)
                     {
                         DialogueNode nextNode = edge.input.node as DialogueNode;
-                        DialogueChoiceSaveData choiceData = (DialogueChoiceSaveData)edge.output.userData;
-                        choiceData.NodeID = nextNode.ID;
+
+                        if (edge.output.userData is DialogueChoiceSaveData choiceSaveData)
+                        {
+                            DialogueChoiceSaveData choiceData = edge.output.userData as DialogueChoiceSaveData;
+                            choiceData.NodeID = nextNode.ID;
+                        }
+                        else if (edge.output.userData is string conditionSaveData)
+                        {
+                            edge.output.userData = conditionSaveData;
+                        }
                         edge.input.Connect(edge);
                     }
                 }
@@ -489,8 +497,16 @@ namespace AdriKat.DialogueSystem.Graph
                         if (element.GetType() == edgeType)
                         {
                             Edge edge = (Edge)element;
-                            DialogueChoiceSaveData choiceData = (DialogueChoiceSaveData)edge.output.userData;
-                            choiceData.NodeID = "";
+
+                            if (edge.output.userData is DialogueChoiceSaveData choiceData)
+                            {
+                                choiceData.NodeID = "";
+                            }
+                            else if (edge.output.userData is string conditionData)
+                            {
+                                edge.output.userData = "";
+                            }
+
                             edge.input.Disconnect(edge);
                         }
                     }
