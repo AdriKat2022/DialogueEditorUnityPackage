@@ -23,10 +23,10 @@ namespace AdriKat.DialogueSystem.Core
         #endregion
 
         private bool firstCall = true;
-        private DialogueSO currentDialogue;
+        private ExecutableDialogueSO currentDialogue;
 
         private int lastDialogueIndex;
-        private List<DialogueSO> dialoguesHistory;
+        private List<ExecutableDialogueSO> dialoguesHistory;
 
         #region Initialization Methods
         private void Awake()
@@ -82,7 +82,7 @@ namespace AdriKat.DialogueSystem.Core
         /// </summary>
         /// <param name="choiceNumber">Move with this choice index. This parameter is ignored if the current dialogue is single-choice.</param>
         /// <returns>Returns the dialogue if there is one. Returns null if you reached the end.</returns>
-        public DialogueSO GetNext(int choice = 0)
+        public ExecutableDialogueSO GetNext(int choice = 0)
         {
             if (firstCall)
             {
@@ -104,7 +104,7 @@ namespace AdriKat.DialogueSystem.Core
         /// <summary>
         /// Returns the current dialogue without advancing.<br/>
         /// </summary>
-        public DialogueSO GetCurrent()
+        public ExecutableDialogueSO GetCurrent()
         {
             return currentDialogue;
         }
@@ -139,8 +139,9 @@ namespace AdriKat.DialogueSystem.Core
         {
             firstCall = true;
             lastDialogueIndex = -1;
-            currentDialogue = dialogue;
-            dialoguesHistory = new List<DialogueSO>();
+
+            dialoguesHistory = new List<ExecutableDialogueSO>();
+            currentDialogue = ResolveConditionalDialogue(dialogue);
         }
 
         /// <summary>
@@ -168,7 +169,7 @@ namespace AdriKat.DialogueSystem.Core
                 dialoguesHistory.Add(currentDialogue);
                 lastDialogueIndex++;
 
-                currentDialogue = currentDialogue.Choices[choice].NextDialogue;
+                currentDialogue = ResolveConditionalDialogue(currentDialogue.Choices[choice].NextDialogue);
             }
             else
             {
@@ -176,7 +177,7 @@ namespace AdriKat.DialogueSystem.Core
                 dialoguesHistory.Add(currentDialogue);
                 lastDialogueIndex++;
 
-                currentDialogue = currentDialogue.Choices[0].NextDialogue;
+                currentDialogue = ResolveConditionalDialogue(currentDialogue.Choices[0].NextDialogue);
             }
         }
 
@@ -195,5 +196,62 @@ namespace AdriKat.DialogueSystem.Core
             lastDialogueIndex--;
         }
         #endregion
+
+        /// <summary>
+        /// Conditional branches are NOT counted in the history.
+        /// </summary>
+        /// <param name="dialogue"></param>
+        /// <returns></returns>
+        private ExecutableDialogueSO ResolveConditionalDialogue(DialogueSO dialogue)
+        {
+            if (dialogue is ExecutableDialogueSO executableDialogue)
+            {
+                return executableDialogue;
+            }
+
+            DialogueConditionalBranchSO conditionalDialogue = dialogue as DialogueConditionalBranchSO;
+
+            // Check if the conditions are met
+            bool finalResult = false;
+
+            if (conditionalDialogue.ConditionsToBeMet == ConditionType.All)
+            {
+                finalResult = true;
+                foreach (DialogueConditionData condition in conditionalDialogue.Conditions)
+                {
+                    if (!condition.Evaluate())
+                    {
+                        finalResult = false;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                finalResult = false;
+                foreach (DialogueConditionData condition in conditionalDialogue.Conditions)
+                {
+                    if (condition.Evaluate())
+                    {
+                        finalResult = true;
+                        break;
+                    }
+                    else
+                    {
+                        Debug.Log("Condition not met: " + condition);
+                    }
+                }
+            }
+
+            // If the conditions are met, move to the true dialogue, otherwise move to the false dialogue.
+            if (finalResult)
+            {
+                return ResolveConditionalDialogue(conditionalDialogue.DialogueOnTrue);
+            }
+            else
+            {
+                return ResolveConditionalDialogue(conditionalDialogue.DialogueOnFalse);
+            }
+        }
     }
 }

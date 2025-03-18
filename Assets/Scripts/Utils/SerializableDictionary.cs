@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace AdriKat.Editor.DialogueSystem.Utility
+namespace AdriKat.DialogueSystem.Utility
 {
     public class SerializableDictionary
     {

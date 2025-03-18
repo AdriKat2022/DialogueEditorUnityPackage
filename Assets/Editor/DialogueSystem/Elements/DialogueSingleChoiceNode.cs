@@ -1,10 +1,11 @@
+using AdriKat.DialogueSystem.Data;
 using AdriKat.DialogueSystem.Enumerations;
-using AdriKat.Editor.DialogueSystem.Graph.Data;
-using AdriKat.Editor.DialogueSystem.Utility;
+using AdriKat.DialogueSystem.Graph;
+using AdriKat.DialogueSystem.Utility;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-namespace AdriKat.Editor.DialogueSystem.Graph.Elements
+namespace AdriKat.DialogueSystem.Elements
 {
     public class DialogueSingleChoiceNode : DialogueNode
     {

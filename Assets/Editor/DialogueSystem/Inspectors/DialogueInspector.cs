@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 
-namespace AdriKat.Editor.DialogueSystem.Inspector
+namespace AdriKat.DialogueSystem.Inspector
 {
     using AdriKat.DialogueSystem.Core;
     using AdriKat.DialogueSystem.Data;
-    using AdriKat.Editor.DialogueSystem.Utility;
+    using AdriKat.DialogueSystem.Utility;
     using UnityEditor;
 
     [CustomEditor(typeof(Dialogue))]

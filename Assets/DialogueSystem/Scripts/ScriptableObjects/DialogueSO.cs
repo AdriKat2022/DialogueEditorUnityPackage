@@ -1,24 +1,14 @@
-using AdriKat.DialogueSystem.Enumerations;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace AdriKat.DialogueSystem.Data
 {
-    [System.Serializable]
     public class DialogueSO : ScriptableObject
     {
         [field: SerializeField] public string DialogueName { get; set; }
-        [field: SerializeField, TextArea()] public string Text { get; set; }
-        [field: SerializeField] public List<DialogueChoiceData> Choices { get; set; }
-        [field: SerializeField] public DialogueType Type { get; set; }
         [field: SerializeField] public bool IsStartingDialogue { get; set; }
 
-        public void Initialize(string dialogueName, string text, List<DialogueChoiceData> choices, DialogueType dialogueType, bool isStartingDialogue)
+        public void Initialize(bool isStartingDialogue)
         {
-            DialogueName = dialogueName;
-            Text = text;
-            Choices = choices;
-            Type = dialogueType;
             IsStartingDialogue = isStartingDialogue;
         }
     }

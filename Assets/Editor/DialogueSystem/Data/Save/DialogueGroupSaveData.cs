@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AdriKat.Editor.DialogueSystem.Graph.Data
+namespace AdriKat.DialogueSystem.Data
 {
     [System.Serializable]
     public class DialogueGroupSaveData

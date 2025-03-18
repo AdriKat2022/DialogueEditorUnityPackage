@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace AdriKat.Editor.DialogueSystem.Graph.Data
+namespace AdriKat.DialogueSystem.Data
 {
     [Serializable]
     public class DialogueChoiceSaveData

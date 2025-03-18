@@ -1,12 +1,12 @@
+using AdriKat.DialogueSystem.Enumerations;
 using AdriKat.DialogueSystem.Triggers;
-using System;
 using UnityEngine;
 
 namespace AdriKat.DialogueSystem.Conditions
 {
     public class ConditionalDialogue : TriggerableDialogue
     {
-        [SerializeField] private ConditionVariableNamesSO _dialogueVariablesNamesSO;
+        [SerializeField] private DialogueVariableNamesSO _dialogueVariablesNamesSO;
 
         [Header("Condition(s)")]
         [SerializeField] private Condition[] _conditions;
@@ -78,11 +78,6 @@ namespace AdriKat.DialogueSystem.Conditions
             }
         }
 
-        [Serializable]
-        public enum ConditionType
-        {
-            All,
-            Any
-        }
+
     }
 }

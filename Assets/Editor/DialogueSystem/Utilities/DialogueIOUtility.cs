@@ -1,7 +1,7 @@
 using AdriKat.DialogueSystem.Data;
-using AdriKat.Editor.DialogueSystem.Graph;
-using AdriKat.Editor.DialogueSystem.Graph.Data;
-using AdriKat.Editor.DialogueSystem.Graph.Elements;
+using AdriKat.DialogueSystem.Elements;
+using AdriKat.DialogueSystem.Enumerations;
+using AdriKat.DialogueSystem.Graph;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-namespace AdriKat.Editor.DialogueSystem.Utility
+namespace AdriKat.DialogueSystem.Utility
 {
     public static class DialogueIOUtility
     {
@@ -200,18 +200,19 @@ namespace AdriKat.Editor.DialogueSystem.Utility
 
         private static void SaveNodeToScriptableObject(DialogueNode node, DialogueContainerSO dialogueContainer)
         {
-            DialogueSO dialogue;
-
-            if (node.Group != null)
+            if (node.Type == DialogueType.ConditionalBranch)
             {
-                dialogue = CreateAsset<DialogueSO>($"{containerFolderPath}/Groups/{node.Group.title}/Dialogues", node.DialogueName);
-                dialogueContainer.DialogueGroups.AddItem(createdDialogueGroups[node.Group.ID], dialogue);
+                SaveConditionalNodeToScriptableObject(node, dialogueContainer);
             }
             else
             {
-                dialogue = CreateAsset<DialogueSO>($"{containerFolderPath}/Global/Dialogues", node.DialogueName);
-                dialogueContainer.UngroupedDialogues.Add(dialogue);
+                SaveExecutableNodeToScriptableObject(node, dialogueContainer);
             }
+        }
+
+        private static void SaveExecutableNodeToScriptableObject(DialogueNode node, DialogueContainerSO dialogueContainer)
+        {
+            ExecutableDialogueSO dialogue = SaveDialogue<ExecutableDialogueSO>(node, dialogueContainer);
 
             dialogue.Initialize(
                 node.DialogueName,
@@ -223,6 +224,27 @@ namespace AdriKat.Editor.DialogueSystem.Utility
 
             SaveAsset(dialogue);
             createdDialogues.Add(node.ID, dialogue);
+        }
+
+
+        private static void SaveConditionalNodeToScriptableObject(DialogueNode node, DialogueContainerSO dialogueContainer)
+        {
+            DialogueConditionalBranchSO dialogue = SaveDialogue<DialogueConditionalBranchSO>(node, dialogueContainer);
+
+
+            if (node is DialogueConditionalBranchNode conditionalBranchNode)
+            {
+                dialogue.Initialize(
+                    conditionalBranchNode.Conditions,
+                    conditionalBranchNode.ConditionToBeMet,
+                    null,
+                    null,
+                    node.IsStartingNode()
+                );
+            }
+
+            createdDialogues.Add(node.ID, dialogue);
+            SaveAsset(dialogue);
         }
 
         private static List<DialogueChoiceData> ConvertNodeChoicesToDialogueChoices(List<DialogueChoiceSaveData> choices)
@@ -245,17 +267,36 @@ namespace AdriKat.Editor.DialogueSystem.Utility
             foreach (var node in nodes)
             {
                 DialogueSO dialogue = createdDialogues[node.ID];
-                for (int choiceIndex = 0; choiceIndex < node.Choices.Count; choiceIndex++)
-                {
-                    DialogueChoiceSaveData choice = node.Choices[choiceIndex];
 
-                    if (string.IsNullOrEmpty(choice.NodeID))
+                if (dialogue is DialogueConditionalBranchSO conditionalBranchSO)
+                {
+                    DialogueConditionalBranchNode conditionalBranchNode = node as DialogueConditionalBranchNode;
+
+                    if (!string.IsNullOrEmpty(conditionalBranchNode.NodeOnTrue))
                     {
-                        continue;
+                        conditionalBranchSO.DialogueOnTrue = createdDialogues[conditionalBranchNode.NodeOnTrue];
+                    }
+                    if (!string.IsNullOrEmpty(conditionalBranchNode.NodeOnFalse))
+                    {
+                        conditionalBranchSO.DialogueOnFalse = createdDialogues[conditionalBranchNode.NodeOnFalse];
                     }
 
-                    dialogue.Choices[choiceIndex].NextDialogue = createdDialogues[choice.NodeID];
                     SaveAsset(dialogue);
+                }
+                else if (dialogue is ExecutableDialogueSO executableDialogueSO)
+                {
+                    for (int choiceIndex = 0; choiceIndex < node.Choices.Count; choiceIndex++)
+                    {
+                        DialogueChoiceSaveData choice = node.Choices[choiceIndex];
+
+                        if (string.IsNullOrEmpty(choice.NodeID))
+                        {
+                            continue;
+                        }
+
+                        executableDialogueSO.Choices[choiceIndex].NextDialogue = createdDialogues[choice.NodeID];
+                        SaveAsset(dialogue);
+                    }
                 }
             }
         }
@@ -398,6 +439,23 @@ namespace AdriKat.Editor.DialogueSystem.Utility
         #endregion
 
         #region Utility Methods
+
+        private static T SaveDialogue<T>(DialogueNode node, DialogueContainerSO dialogueContainer) where T : DialogueSO
+        {
+            T dialogue;
+            if (node.Group != null)
+            {
+                dialogue = CreateAsset<T>($"{containerFolderPath}/Groups/{node.Group.title}/Dialogues", node.DialogueName);
+                dialogueContainer.DialogueGroups.AddItem(createdDialogueGroups[node.Group.ID], dialogue);
+            }
+            else
+            {
+                dialogue = CreateAsset<T>($"{containerFolderPath}/Global/Dialogues", node.DialogueName);
+                dialogueContainer.UngroupedDialogues.Add(dialogue);
+            }
+
+            return dialogue;
+        }
 
         public static void SaveAsset(UnityEngine.Object asset)
         {

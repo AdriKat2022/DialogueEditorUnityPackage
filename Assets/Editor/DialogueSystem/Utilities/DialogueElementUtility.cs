@@ -1,9 +1,9 @@
-using AdriKat.Editor.DialogueSystem.Graph.Elements;
+using AdriKat.DialogueSystem.Elements;
 using System;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 
-namespace AdriKat.Editor.DialogueSystem.Utility
+namespace AdriKat.DialogueSystem.Utility
 {
     public static class DialogueElementUtility
     {

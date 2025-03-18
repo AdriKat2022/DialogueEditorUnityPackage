@@ -1,8 +1,9 @@
 using AdriKat.DialogueSystem.Conditions;
 using UnityEditorInternal;
 
-namespace AdriKat.Editor.DialogueSystem.Inspector.Conditions
+namespace AdriKat.DialogueSystem.Inspector.Conditions
 {
+    using AdriKat.DialogueSystem.Variables;
     using System;
     using UnityEditor;
     using UnityEngine;
@@ -117,7 +118,7 @@ namespace AdriKat.Editor.DialogueSystem.Inspector.Conditions
                     SerializedProperty boolKey = element.FindPropertyRelative("_boolKey");
                     SerializedProperty boolComparisonType = element.FindPropertyRelative("_boolComparisonType");
                     SerializedProperty boolValue = element.FindPropertyRelative("_boolValue");
-                    DrawDropdownForPropertyAndType(variableNameChoiceRect, boolKey, Condition.DialogueVariableType.Bool);
+                    DrawDropdownForPropertyAndType(variableNameChoiceRect, boolKey, DialogueVariableType.Bool);
                     boolComparisonType.enumValueFlag = (int)(Condition.BoolComparisonType)EditorGUI.EnumPopup(
                         comparisonTypeRect,
                         (Condition.BoolComparisonType)boolComparisonType.enumValueFlag
@@ -128,7 +129,7 @@ namespace AdriKat.Editor.DialogueSystem.Inspector.Conditions
                     SerializedProperty intKey = element.FindPropertyRelative("_intKey");
                     SerializedProperty intComparisonType = element.FindPropertyRelative("_intComparisionType");
                     SerializedProperty intValue = element.FindPropertyRelative("_intValue");
-                    DrawDropdownForPropertyAndType(variableNameChoiceRect, intKey, Condition.DialogueVariableType.Int);
+                    DrawDropdownForPropertyAndType(variableNameChoiceRect, intKey, DialogueVariableType.Int);
                     intComparisonType.enumValueFlag = (int)(Condition.IntComparisonType)EditorGUI.EnumPopup(
                         comparisonTypeRect,
                         (Condition.IntComparisonType)intComparisonType.enumValueFlag
@@ -139,7 +140,7 @@ namespace AdriKat.Editor.DialogueSystem.Inspector.Conditions
                     SerializedProperty stringKey = element.FindPropertyRelative("_stringKey");
                     SerializedProperty stringValue = element.FindPropertyRelative("_stringValue");
                     SerializedProperty stringComparisonType = element.FindPropertyRelative("_stringComparisonType");
-                    DrawDropdownForPropertyAndType(variableNameChoiceRect, stringKey, Condition.DialogueVariableType.String);
+                    DrawDropdownForPropertyAndType(variableNameChoiceRect, stringKey, DialogueVariableType.String);
                     stringComparisonType.enumValueFlag = (int)(Condition.StringComparisonType)EditorGUI.EnumPopup(
                         comparisonTypeRect,
                         (Condition.StringComparisonType)stringComparisonType.enumValueFlag
@@ -149,10 +150,10 @@ namespace AdriKat.Editor.DialogueSystem.Inspector.Conditions
             }
         }
 
-        private void DrawDropdownForPropertyAndType(Rect rect, SerializedProperty property, Condition.DialogueVariableType type)
+        private void DrawDropdownForPropertyAndType(Rect rect, SerializedProperty property, DialogueVariableType type)
         {
             // Get the names of the variables based on the type
-            ConditionVariableNamesSO dialogueVariableNames = _dialogueVariablesNamesSO.objectReferenceValue as ConditionVariableNamesSO;
+            DialogueVariableNamesSO dialogueVariableNames = _dialogueVariablesNamesSO.objectReferenceValue as DialogueVariableNamesSO;
             string[] variableNames = dialogueVariableNames.GetVarNames(type);
 
             // If the variable names are not found, show a warning
@@ -169,7 +170,7 @@ namespace AdriKat.Editor.DialogueSystem.Inspector.Conditions
             property.stringValue = variableNames[selected];
         }
 
-        public static ConditionVariableNamesSO MakeNewVariableEnvironment()
+        public static DialogueVariableNamesSO MakeNewVariableEnvironment()
         {
             string path = EditorUtility.SaveFilePanelInProject("Save Dialogue Variable Names", "DialogueVariableNames", "asset", "Save Dialogue Variable Names", "Assets/Resources");
 
@@ -180,7 +181,7 @@ namespace AdriKat.Editor.DialogueSystem.Inspector.Conditions
             }
 
             // Create a new DialogueVariableNamesSO
-            ConditionVariableNamesSO dialogueVariablesNamesSO = ScriptableObject.CreateInstance<ConditionVariableNamesSO>();
+            DialogueVariableNamesSO dialogueVariablesNamesSO = ScriptableObject.CreateInstance<DialogueVariableNamesSO>();
             dialogueVariablesNamesSO.name = "DialogueConditionVariableEnvironment";
 
             // Save it in the Resources folder

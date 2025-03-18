@@ -1,10 +1,11 @@
+using AdriKat.DialogueSystem.Variables;
 using UnityEngine;
 
 namespace AdriKat.DialogueSystem.Conditions
 {
     public class ConditionVariableModifier : MonoBehaviour
     {
-        [SerializeField] private ConditionVariableNamesSO _dialogueVariablesNamesSO;
+        [SerializeField] private DialogueVariableNamesSO _dialogueVariablesNamesSO;
 
         [SerializeField] private Condition.DialogueVariableType _modifierValueType;
         [Space]
