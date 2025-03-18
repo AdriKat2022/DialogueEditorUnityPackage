@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AdriKat.Editor.DialogueSystem.Graph
+namespace AdriKat.DialogueSystem.Graph
 {
     public class DialogueErrorData
     {

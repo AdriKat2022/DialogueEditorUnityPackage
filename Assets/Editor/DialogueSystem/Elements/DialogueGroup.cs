@@ -2,7 +2,7 @@ using System;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-namespace AdriKat.Editor.DialogueSystem.Graph.Elements
+namespace AdriKat.DialogueSystem.Elements
 {
     public class DialogueGroup : Group
     {

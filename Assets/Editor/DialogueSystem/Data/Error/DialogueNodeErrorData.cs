@@ -1,7 +1,7 @@
-using AdriKat.Editor.DialogueSystem.Graph.Elements;
+using AdriKat.DialogueSystem.Elements;
 using System.Collections.Generic;
 
-namespace AdriKat.Editor.DialogueSystem.Graph
+namespace AdriKat.DialogueSystem.Graph
 {
     public class DialogueNodeErrorData
     {

@@ -108,7 +108,7 @@ namespace AdriKat.DialogueSystem.Core
 
             while (!dialogue.IsEndOfDialogue())
             {
-                DialogueSO currentDialogueBubble = dialogue.GetNext(_lastOptionSelected);
+                ExecutableDialogueSO currentDialogueBubble = dialogue.GetNext(_lastOptionSelected);
 
                 if (currentDialogueBubble == null)
                 {

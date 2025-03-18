@@ -1,11 +1,11 @@
-using AdriKat.Editor.DialogueSystem.Graph;
+using AdriKat.DialogueSystem.Graph;
 using System.IO;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace AdriKat.Editor.DialogueSystem.Utility
+namespace AdriKat.DialogueSystem.Utility
 {
     public class DialogueEditorWindow : EditorWindow
     {

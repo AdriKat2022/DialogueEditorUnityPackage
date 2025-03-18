@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace AdriKat.DialogueSystem.Conditions
+namespace AdriKat.DialogueSystem.Variables
 {
     public static class DialogueVariables
     {
@@ -50,7 +50,7 @@ namespace AdriKat.DialogueSystem.Conditions
             _intVariables.Clear();
         }
 
-        public static void SetDialogueVariablesNamesSO(ConditionVariableNamesSO dialogueVariablesNamesSO)
+        public static void SetDialogueVariablesNamesSO(DialogueVariableNamesSO dialogueVariablesNamesSO)
         {
             foreach (var variable in dialogueVariablesNamesSO.BoolVarNames)
             {

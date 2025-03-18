@@ -2,7 +2,7 @@ using AdriKat.DialogueSystem.Enumerations;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AdriKat.Editor.DialogueSystem.Graph.Data
+namespace AdriKat.DialogueSystem.Data
 {
     [System.Serializable]
     public class DialogueNodeSaveData

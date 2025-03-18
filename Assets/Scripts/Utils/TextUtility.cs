@@ -1,5 +1,5 @@
 
-namespace AdriKat.Editor.DialogueSystem.Utility
+namespace AdriKat.DialogueSystem.Utility
 {
     public static class TextUtility
     {

@@ -1,7 +1,7 @@
 using System;
 using UnityEditor;
 
-namespace AdriKat.Editor.DialogueSystem.Utility
+namespace AdriKat.DialogueSystem.Utility
 {
     public static class DialogueInspectorUtility
     {

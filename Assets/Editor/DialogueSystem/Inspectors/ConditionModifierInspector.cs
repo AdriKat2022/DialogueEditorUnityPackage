@@ -1,7 +1,8 @@
 using AdriKat.DialogueSystem.Conditions;
 
-namespace AdriKat.Editor.DialogueSystem.Inspector.Conditions
+namespace AdriKat.DialogueSystem.Inspector.Conditions
 {
+    using AdriKat.DialogueSystem.Variables;
     using System;
     using UnityEditor;
     using UnityEngine;
@@ -64,21 +65,21 @@ namespace AdriKat.Editor.DialogueSystem.Inspector.Conditions
 
             EditorGUILayout.Space(16);
 
-            switch ((Condition.DialogueVariableType)_modifierValueType.enumValueIndex)
+            switch ((DialogueVariableType)_modifierValueType.enumValueIndex)
             {
-                case Condition.DialogueVariableType.Bool:
-                    DrawDropdownForPropertyAndType(_boolKey, Condition.DialogueVariableType.Bool);
+                case DialogueVariableType.Bool:
+                    DrawDropdownForPropertyAndType(_boolKey, DialogueVariableType.Bool);
                     EditorGUILayout.PropertyField(_boolModifierType);
                     EditorGUILayout.PropertyField(_boolValue);
                     break;
-                case Condition.DialogueVariableType.Int:
+                case DialogueVariableType.Int:
                     // Display the three properties aside each
-                    DrawDropdownForPropertyAndType(_intKey, Condition.DialogueVariableType.Int);
+                    DrawDropdownForPropertyAndType(_intKey, DialogueVariableType.Int);
                     EditorGUILayout.PropertyField(_intModifierType);
                     EditorGUILayout.PropertyField(_intValue);
                     break;
-                case Condition.DialogueVariableType.String:
-                    DrawDropdownForPropertyAndType(_stringKey, Condition.DialogueVariableType.String);
+                case DialogueVariableType.String:
+                    DrawDropdownForPropertyAndType(_stringKey, DialogueVariableType.String);
                     EditorGUILayout.PropertyField(_stringModifierType);
                     EditorGUILayout.PropertyField(_stringValue);
                     break;
@@ -87,10 +88,10 @@ namespace AdriKat.Editor.DialogueSystem.Inspector.Conditions
             serializedObject.ApplyModifiedProperties();
         }
 
-        private void DrawDropdownForPropertyAndType(SerializedProperty property, Condition.DialogueVariableType type)
+        private void DrawDropdownForPropertyAndType(SerializedProperty property, DialogueVariableType type)
         {
             // Get the names of the variables based on the type
-            ConditionVariableNamesSO dialogueVariableNames = _dialogueVariablesNamesSO.objectReferenceValue as ConditionVariableNamesSO;
+            DialogueVariableNamesSO dialogueVariableNames = _dialogueVariablesNamesSO.objectReferenceValue as DialogueVariableNamesSO;
             string[] variableNames = dialogueVariableNames.GetVarNames(type);
 
             // If the variable names are not found, show a warning

@@ -1,4 +1,4 @@
-using AdriKat.Editor.DialogueSystem.Utility;
+using AdriKat.DialogueSystem.Utility;
 using System.Collections.Generic;
 using UnityEngine;
 

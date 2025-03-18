@@ -1,8 +1,8 @@
-using AdriKat.Editor.DialogueSystem.Utility;
+using AdriKat.DialogueSystem.Utility;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AdriKat.Editor.DialogueSystem.Graph.Data
+namespace AdriKat.DialogueSystem.Data
 {
     public class DialogueGraphSaveDataSO : ScriptableObject
     {

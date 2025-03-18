@@ -1,3 +1,4 @@
+using AdriKat.DialogueSystem.Variables;
 using System;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace AdriKat.DialogueSystem.Conditions
     [Serializable]
     public class Condition
     {
-        [SerializeField] private ConditionVariableNamesSO _dialogueVariablesNamesSO;
+        [SerializeField] private DialogueVariableNamesSO _dialogueVariablesNamesSO;
 
         [SerializeField] private DialogueVariableType _conditionValueType;
         [Space]
@@ -88,12 +89,6 @@ namespace AdriKat.DialogueSystem.Conditions
 
             return false;
         }
-
-        #region Evaluations
-
-
-
-        #endregion
 
         #region Enums
         public enum DialogueVariableType

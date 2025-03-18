@@ -1,7 +1,7 @@
+using AdriKat.DialogueSystem.Data;
+using AdriKat.DialogueSystem.Elements;
 using AdriKat.DialogueSystem.Enumerations;
-using AdriKat.Editor.DialogueSystem.Graph.Data;
-using AdriKat.Editor.DialogueSystem.Graph.Elements;
-using AdriKat.Editor.DialogueSystem.Utility;
+using AdriKat.DialogueSystem.Utility;
 using System;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 
-namespace AdriKat.Editor.DialogueSystem.Graph
+namespace AdriKat.DialogueSystem.Graph
 {
     public class DialogueGraphView : GraphView
     {
@@ -83,6 +83,7 @@ namespace AdriKat.Editor.DialogueSystem.Graph
             this.AddManipulator(new RectangleSelector());
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Single Choice)", DialogueType.SingleChoice));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Multiple Choice)", DialogueType.MultipleChoice));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Conditional Branch)", DialogueType.ConditionalBranch));
             this.AddManipulator(CreateGroupContextualMenu());
         }
         #endregion
@@ -99,7 +100,7 @@ namespace AdriKat.Editor.DialogueSystem.Graph
 
         public DialogueNode CreateNode(string nodeName, DialogueType dialogueType, Vector2 position, bool shouldDraw = true)
         {
-            Type nodeType = Type.GetType($"AdriKat.Editor.DialogueSystem.Graph.Elements.Dialogue{dialogueType}Node");
+            Type nodeType = Type.GetType($"AdriKat.DialogueSystem.Elements.Dialogue{dialogueType}Node");
             DialogueNode node = (DialogueNode)Activator.CreateInstance(nodeType);
             node.Initialize(nodeName, this, position);
 

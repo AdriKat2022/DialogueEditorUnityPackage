@@ -1,6 +1,7 @@
+using AdriKat.DialogueSystem.Data;
 using AdriKat.DialogueSystem.Enumerations;
-using AdriKat.Editor.DialogueSystem.Graph.Data;
-using AdriKat.Editor.DialogueSystem.Utility;
+using AdriKat.DialogueSystem.Graph;
+using AdriKat.DialogueSystem.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace AdriKat.Editor.DialogueSystem.Graph.Elements
+namespace AdriKat.DialogueSystem.Elements
 {
     public class DialogueNode : Node
     {
