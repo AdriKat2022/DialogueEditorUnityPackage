@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.adrikat.toolkit": "https://github.com/AdriKat2022/ToolkitUnityPackage.git",
+    "com.adrikat.toolkit": "git+https://github.com/AdriKat2022/ToolkitUnityPackage.git#v1.4.1",
     "com.h8man.2d.navmeshplus": "git@github.com:h8man/NavMeshPlus.git",
     "com.unity.ai.navigation": "2.0.6",
     "com.unity.cinemachine": "3.1.3",
