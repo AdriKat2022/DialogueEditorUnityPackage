@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58af0eb044f2d494d81b987631767529, type: 3}
+  m_Name: SwordInteraction
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: SwordInteraction
+  <DialogueGroups>k__BackingField:
+    list:
+    - Key: {fileID: 11400000, guid: f6d4b13aeb5791e4bb8a306e84acddfd, type: 2}
+      Value:
+      - {fileID: 11400000, guid: fab98cdd59e0950418bb6878b71ae6f8, type: 2}
+      - {fileID: 11400000, guid: ae433bec981084a478076c4df614f1b3, type: 2}
+    - Key: {fileID: 11400000, guid: b93abf8b423346f41b5e371bda683ed3, type: 2}
+      Value:
+      - {fileID: 11400000, guid: 02cd4c70ef983ce4bb624ab62e574917, type: 2}
+      - {fileID: 11400000, guid: bdd5293a136ea7d49aa5b99cb83c1511, type: 2}
+      - {fileID: 11400000, guid: 1f20fba9b5505d348bd2d663d96ceef8, type: 2}
+      - {fileID: 11400000, guid: b2148426bc2bac347859d396d65cfaac, type: 2}
+      - {fileID: 11400000, guid: 2cab966d7ebdd9c41917d6b5aa2cd008, type: 2}
+      - {fileID: 11400000, guid: 565040a9b7ab9b74696783b607fb8dc1, type: 2}
+    - Key: {fileID: 11400000, guid: 13d0d7a9954be2343bfe2cb1585e537a, type: 2}
+      Value:
+      - {fileID: 11400000, guid: 714f058e1decfca4abd78f570ccfdd8a, type: 2}
+      - {fileID: 11400000, guid: 74ca021aa2669de49b1e03727afe00c1, type: 2}
+      - {fileID: 11400000, guid: 193a6a1da527ff5459c1b8c5af125064, type: 2}
+      - {fileID: 11400000, guid: 73d599f72d45a324a9cd15278e5a15bc, type: 2}
+      - {fileID: 11400000, guid: ce110fd08d7ea114d9f2b1ada0ea559d, type: 2}
+      - {fileID: 11400000, guid: 294084e94c9e7f949b202406eb220cbf, type: 2}
+  <UngroupedDialogues>k__BackingField: []

@@ -230,7 +230,6 @@ GameObject:
   - component: {fileID: 5411097817564795834}
   - component: {fileID: 2950787738161259304}
   - component: {fileID: 6276850449678539232}
-  - component: {fileID: 2490076174252159398}
   - component: {fileID: 7167553401128127475}
   m_Layer: 5
   m_Name: DialogueBox
@@ -322,30 +321,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.8
---- !u!114 &2490076174252159398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4151400300597430004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d00918f1146ac647ada28abe2fb3b53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _overrideAnimation: 0
-  _animationTimer: 0
-  _animationSmoothness: 0
-  _dialogueVariablesNamesSO: {fileID: 11400000, guid: c1348df03d8f9e94daf8750acdfc9210, type: 2}
-  _dialogueVariablesNamesS: {fileID: 0}
-  _dialogueVariablesNames: {fileID: 0}
-  _dialogueVariablesName: {fileID: 0}
-  test: 
-  test1: 
-  test2: 0
-  test3: 0
-  animatorKeys: 
 --- !u!114 &7167553401128127475
 MonoBehaviour:
   m_ObjectHideFlags: 0

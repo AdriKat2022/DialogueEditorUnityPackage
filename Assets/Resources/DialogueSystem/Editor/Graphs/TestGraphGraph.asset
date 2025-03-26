@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9959f8aab473e3d43ac11b72407a3b14, type: 3}
+  m_Name: TestGraphGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: TestGraph
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: 1dd8580b-79c1-4cb7-82b4-15583aed5475
+    <Name>k__BackingField: DialogueGroup
+    <Position>k__BackingField: {x: 245, y: 150}
+  <Nodes>k__BackingField:
+  - <ID>k__BackingField: 80378f60-5cc9-47c1-8d9d-e3747f9162ba
+    <Name>k__BackingField: NewSingleChoice
+    <Text>k__BackingField: DialogueText
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <Type>k__BackingField: 0
+    <ConditionsToBeMet>k__BackingField: 0
+    <DialogueVariableNames>k__BackingField: {fileID: 0}
+    <Conditions>k__BackingField: []
+    <NodeIDOnTrue>k__BackingField: 
+    <NodeIDOnFalse>k__BackingField: 
+    <Position>k__BackingField: {x: 656, y: 81}
+  - <ID>k__BackingField: 9fb4fd07-8561-4f48-a65f-60c94cf67a6b
+    <Name>k__BackingField: NewMultipleChoice
+    <Text>k__BackingField: DialogueText
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: New Choice
+      <NodeID>k__BackingField: 80378f60-5cc9-47c1-8d9d-e3747f9162ba
+    - <Text>k__BackingField: New Choice
+      <NodeID>k__BackingField: ed43fc20-f5cf-412c-9595-6ab60b5addb6
+    <GroupID>k__BackingField: 
+    <Type>k__BackingField: 1
+    <ConditionsToBeMet>k__BackingField: 0
+    <DialogueVariableNames>k__BackingField: {fileID: 0}
+    <Conditions>k__BackingField: []
+    <NodeIDOnTrue>k__BackingField: 
+    <NodeIDOnFalse>k__BackingField: 
+    <Position>k__BackingField: {x: 140, y: 292}
+  - <ID>k__BackingField: ed43fc20-f5cf-412c-9595-6ab60b5addb6
+    <Name>k__BackingField: NewConditionalBranch
+    <Text>k__BackingField: DialogueText
+    <Choices>k__BackingField: []
+    <GroupID>k__BackingField: 
+    <Type>k__BackingField: 2
+    <ConditionsToBeMet>k__BackingField: 0
+    <DialogueVariableNames>k__BackingField: {fileID: 0}
+    <Conditions>k__BackingField:
+    - DialogueVariablesNamesSO: {fileID: 0}
+      <ConditionValueType>k__BackingField: 0
+      <Key>k__BackingField: 
+      <BoolComparisonType>k__BackingField: 0
+      <BoolValue>k__BackingField: 0
+      <IntComparisonType>k__BackingField: 0
+      <IntValue>k__BackingField: 0
+      <StringComparisonType>k__BackingField: 0
+      <StringValue>k__BackingField: 
+    <NodeIDOnTrue>k__BackingField: 
+    <NodeIDOnFalse>k__BackingField: 
+    <Position>k__BackingField: {x: 626, y: 380}
+  <OldGroupNames>k__BackingField:
+  - DialogueGroup
+  <OldUngroupedNodeNames>k__BackingField:
+  - NewSingleChoice
+  - NewMultipleChoice
+  - NewConditionalBranch
+  <OldGroupedNodeNames>k__BackingField:
+    list: []
