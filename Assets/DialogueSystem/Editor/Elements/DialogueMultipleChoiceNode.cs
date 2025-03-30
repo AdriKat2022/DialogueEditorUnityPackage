@@ -27,7 +27,6 @@ namespace AdriKat.DialogueSystem.Elements
         {
             base.Draw();
 
-            // Main Container
             Button addChoiceButton = DialogueElementUtility.CreateButton("Add Choice", () =>
             {
                 DialogueChoiceSaveData choiceData = new()
@@ -40,15 +39,20 @@ namespace AdriKat.DialogueSystem.Elements
                 outputContainer.Add(choicePort);
             });
             addChoiceButton.AddToClassList("ds-node__button");
-            mainContainer.Insert(1, addChoiceButton);
+            extensionContainer.Insert(0, addChoiceButton);
 
+
+            RefreshExpandedState();
+        }
+
+        protected override void DrawOutputPorts()
+        {
             // Output Container
             foreach (DialogueChoiceSaveData choice in Choices)
             {
                 Port choicePort = CreateChoicePort(choice);
                 outputContainer.Add(choicePort);
             }
-            RefreshExpandedState();
         }
 
         private Port CreateChoicePort(object userData)

@@ -27,17 +27,17 @@ namespace AdriKat.DialogueSystem.Elements
         {
             base.Draw();
 
+            RefreshExpandedState();
+        }
 
+        protected override void DrawOutputPorts()
+        {
             foreach (DialogueChoiceSaveData choice in Choices)
             {
                 Port choicePort = this.CreatePort(choice.Text);
                 choicePort.userData = choice;
-                //Debug.Log($"Drawing! ({choicePort.userData})");
                 outputContainer.Add(choicePort);
             }
-
-            RefreshExpandedState();
         }
-
     }
 }

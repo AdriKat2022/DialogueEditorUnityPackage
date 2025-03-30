@@ -13,6 +13,7 @@ namespace AdriKat.DialogueSystem.Utility
 {
     public static class DialogueIOUtility
     {
+        public static readonly string AUTHORS_FOLDER = "Assets/Resources/DialogueSystem/Authors";
         public static readonly string GRAPHS_SAVE_PATH = "Assets/Resources/DialogueSystem/Editor/Graphs";
         public static readonly string DIALOGUES_SAVE_PATH = "Assets/Resources/DialogueSystem";
         public static readonly string DIALOGUES_GLOBALSPACE_FOLDER = "Global";
@@ -235,6 +236,7 @@ namespace AdriKat.DialogueSystem.Utility
                 node.DialogueName,
                 node.DialogueText,
                 ConvertNodeChoicesToDialogueChoices(node.Choices),
+                null, // Save the author of the node
                 node.Type,
                 node.IsStartingNode()
             );

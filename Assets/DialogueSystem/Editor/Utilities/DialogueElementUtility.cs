@@ -59,5 +59,11 @@ namespace AdriKat.DialogueSystem.Utility
 
             return textArea;
         }
+
+        public static void AddHelpBox(this VisualElement parentElement, string message, HelpBoxMessageType error)
+        {
+            HelpBox helpBox = new(message, error);
+            parentElement.Add(helpBox);
+        }
     }
 }

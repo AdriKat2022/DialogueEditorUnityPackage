@@ -11,13 +11,15 @@ namespace AdriKat.DialogueSystem.Utility
     {
         private DialogueGraphView graphView;
         private readonly string defaultFileName = "DialogueFileName";
-        private static TextField fileNameTextField;
         private Button saveButton;
+
+        private static TextField fileNameTextField;
+        private static DialogueEditorWindow currentDialogueEditorWindow;
 
         [MenuItem("Window/Dialogue Editor Window")]
         public static void ShowExample()
         {
-            GetWindow<DialogueEditorWindow>("Dialogue Editor Window");
+            currentDialogueEditorWindow = GetWindow<DialogueEditorWindow>("Dialogue Editor Window");
         }
 
         private void OnEnable()

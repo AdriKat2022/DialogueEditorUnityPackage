@@ -574,6 +574,11 @@ namespace AdriKat.DialogueSystem.Graph
 
             NameErrorAmount = 0;
         }
+
+        internal void Repaint()
+        {
+            editorWindow.Repaint();
+        }
         #endregion
     }
 }
