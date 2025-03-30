@@ -167,7 +167,7 @@ namespace AdriKat.DialogueSystem.Elements
 
             if (guids.Length == 0)
             {
-                Debug.LogWarning("No Author ScriptableObjects found in the folder: " + DialogueIOUtility.AUTHORS_FOLDER);
+                authorFoldout.AddHelpBox("No authors found!\nCreate your first one by clicking the button below.", HelpBoxMessageType.Warning);
 
                 // Create a button to create a new Author
                 Button createAuthorButton = DialogueElementUtility.CreateButton("Create Author", () =>

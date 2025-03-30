@@ -19,58 +19,19 @@ MonoBehaviour:
     <Position>k__BackingField: {x: -2144, y: -717}
   - <ID>k__BackingField: a7520f91-e24f-4a72-85b7-ac244fb212d9
     <Name>k__BackingField: CoinCollect
-    <Position>k__BackingField: {x: 1226.9999, y: -285.99997}
+    <Position>k__BackingField: {x: 1227, y: -286}
   <Nodes>k__BackingField:
-  - <ID>k__BackingField: 0a124c2f-be16-4037-a78c-09aba6cf4e5d
-    <Name>k__BackingField: CollectingSword
-    <Text>k__BackingField: Whereas you still feel unworthy of the sword, you reflect
-      about taking possesion of it. You are unaware of the responsabilities that
-      are coming along with it.
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <NodeID>k__BackingField: 9188b31d-dae4-44c2-86f2-fdbf27d85078
-    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
-    <Type>k__BackingField: 0
-    <ConditionsToBeMet>k__BackingField: 0
-    <DialogueVariableNames>k__BackingField: {fileID: 0}
-    <Conditions>k__BackingField: []
-    <NodeIDOnTrue>k__BackingField: 
-    <NodeIDOnFalse>k__BackingField: 
-    <Position>k__BackingField: {x: -1275, y: 315}
-  - <ID>k__BackingField: f7ca2224-a666-4d9e-b21d-dc23216a4372
-    <Name>k__BackingField: TakingTheSword
-    <Text>k__BackingField: You choose to take the sword.
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <NodeID>k__BackingField: fd1bab72-dff8-4fe8-97f9-17a69cc5d2dd
-    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
-    <Type>k__BackingField: 0
-    <ConditionsToBeMet>k__BackingField: 0
-    <DialogueVariableNames>k__BackingField: {fileID: 0}
-    <Conditions>k__BackingField: []
-    <NodeIDOnTrue>k__BackingField: 
-    <NodeIDOnFalse>k__BackingField: 
-    <Position>k__BackingField: {x: -512, y: 315}
-  - <ID>k__BackingField: 50807d23-24f6-40d8-a4b0-131f0e6072d3
-    <Name>k__BackingField: TheEnd
-    <Text>k__BackingField: In the end, you still interacted with the sword.
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <NodeID>k__BackingField: 
-    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
-    <Type>k__BackingField: 0
-    <ConditionsToBeMet>k__BackingField: 0
-    <DialogueVariableNames>k__BackingField: {fileID: 0}
-    <Conditions>k__BackingField: []
-    <NodeIDOnTrue>k__BackingField: 
-    <NodeIDOnFalse>k__BackingField: 
-    <Position>k__BackingField: {x: 321, y: 530}
   - <ID>k__BackingField: 5717faee-6a7d-4a75-b3ee-2ed67d07a476
     <Name>k__BackingField: AlreadyGotCoin2
     <Text>k__BackingField: You just, can't see it. The developer did not draw it.
     <Choices>k__BackingField:
     - <Text>k__BackingField: Next Dialogue
       <NodeID>k__BackingField: 45d1d214-501a-4b65-99ce-ddd0be7b2573
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
     <GroupID>k__BackingField: a7520f91-e24f-4a72-85b7-ac244fb212d9
     <Type>k__BackingField: 0
     <ConditionsToBeMet>k__BackingField: 0
@@ -85,6 +46,11 @@ MonoBehaviour:
     <Choices>k__BackingField:
     - <Text>k__BackingField: Next Dialogue
       <NodeID>k__BackingField: 5717faee-6a7d-4a75-b3ee-2ed67d07a476
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
     <GroupID>k__BackingField: a7520f91-e24f-4a72-85b7-ac244fb212d9
     <Type>k__BackingField: 0
     <ConditionsToBeMet>k__BackingField: 0
@@ -99,6 +65,11 @@ MonoBehaviour:
     <Choices>k__BackingField:
     - <Text>k__BackingField: Next Dialogue
       <NodeID>k__BackingField: 
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
     <GroupID>k__BackingField: a7520f91-e24f-4a72-85b7-ac244fb212d9
     <Type>k__BackingField: 0
     <ConditionsToBeMet>k__BackingField: 0
@@ -107,29 +78,15 @@ MonoBehaviour:
     <NodeIDOnTrue>k__BackingField: 
     <NodeIDOnFalse>k__BackingField: 
     <Position>k__BackingField: {x: 2557, y: 214}
-  - <ID>k__BackingField: 9188b31d-dae4-44c2-86f2-fdbf27d85078
-    <Name>k__BackingField: CollectingSwordChoice
-    <Text>k__BackingField: 'Do you want to collect the sword?
-
-      Be careful,
-      there is no going back!'
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Take the sword
-      <NodeID>k__BackingField: f7ca2224-a666-4d9e-b21d-dc23216a4372
-    - <Text>k__BackingField: Refuse
-      <NodeID>k__BackingField: 4aec4b1c-6a94-4581-8eab-3a736271ed71
-    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
-    <Type>k__BackingField: 1
-    <ConditionsToBeMet>k__BackingField: 0
-    <DialogueVariableNames>k__BackingField: {fileID: 0}
-    <Conditions>k__BackingField: []
-    <NodeIDOnTrue>k__BackingField: 
-    <NodeIDOnFalse>k__BackingField: 
-    <Position>k__BackingField: {x: -931, y: 530}
   - <ID>k__BackingField: e3fc470d-a10d-480a-a1d1-5736679efa19
     <Name>k__BackingField: NewConditionalBranch
     <Text>k__BackingField: DialogueText
     <Choices>k__BackingField: []
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
     <GroupID>k__BackingField: a7520f91-e24f-4a72-85b7-ac244fb212d9
     <Type>k__BackingField: 2
     <ConditionsToBeMet>k__BackingField: 0
@@ -151,6 +108,11 @@ MonoBehaviour:
     <Name>k__BackingField: NewConditionalBranch
     <Text>k__BackingField: DialogueText
     <Choices>k__BackingField: []
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
     <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
     <Type>k__BackingField: 2
     <ConditionsToBeMet>k__BackingField: 0
@@ -172,6 +134,11 @@ MonoBehaviour:
     <Name>k__BackingField: FirstConditionalBranch
     <Text>k__BackingField: DialogueText
     <Choices>k__BackingField: []
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
     <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
     <Type>k__BackingField: 2
     <ConditionsToBeMet>k__BackingField: 0
@@ -193,6 +160,11 @@ MonoBehaviour:
     <Name>k__BackingField: 2ndConditionalBranch
     <Text>k__BackingField: DialogueText
     <Choices>k__BackingField: []
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
     <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
     <Type>k__BackingField: 2
     <ConditionsToBeMet>k__BackingField: 0
@@ -210,82 +182,15 @@ MonoBehaviour:
     <NodeIDOnTrue>k__BackingField: 2371ea8c-7ef4-4f56-862b-9e6aee62e10d
     <NodeIDOnFalse>k__BackingField: 78ed26c5-2d56-448f-8df6-63716cc747a8
     <Position>k__BackingField: {x: -1013, y: -526}
-  - <ID>k__BackingField: 00cdec9e-abc2-4013-9c80-7b83a732d486
-    <Name>k__BackingField: CannotTakeTheSword
-    <Text>k__BackingField: It seems you cannot take the sword yet.
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <NodeID>k__BackingField: 155aa727-36d6-4e4a-9439-fbb761609b0e
-    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
-    <Type>k__BackingField: 0
-    <ConditionsToBeMet>k__BackingField: 0
-    <DialogueVariableNames>k__BackingField: {fileID: 0}
-    <Conditions>k__BackingField: []
-    <NodeIDOnTrue>k__BackingField: 
-    <NodeIDOnFalse>k__BackingField: 
-    <Position>k__BackingField: {x: -1014, y: 24}
-  - <ID>k__BackingField: fd1bab72-dff8-4fe8-97f9-17a69cc5d2dd
-    <Name>k__BackingField: TakingTheSword2
-    <Text>k__BackingField: Unfortunately, the developer did nothing about it.
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <NodeID>k__BackingField: 50807d23-24f6-40d8-a4b0-131f0e6072d3
-    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
-    <Type>k__BackingField: 0
-    <ConditionsToBeMet>k__BackingField: 0
-    <DialogueVariableNames>k__BackingField: {fileID: 0}
-    <Conditions>k__BackingField: []
-    <NodeIDOnTrue>k__BackingField: 
-    <NodeIDOnFalse>k__BackingField: 
-    <Position>k__BackingField: {x: -216, y: 272}
-  - <ID>k__BackingField: 4aec4b1c-6a94-4581-8eab-3a736271ed71
-    <Name>k__BackingField: Refusing
-    <Text>k__BackingField: You refused to take the sword. Because of your wiseness
-      or cowardice? Nobody will ever know.
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <NodeID>k__BackingField: 50807d23-24f6-40d8-a4b0-131f0e6072d3
-    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
-    <Type>k__BackingField: 0
-    <ConditionsToBeMet>k__BackingField: 0
-    <DialogueVariableNames>k__BackingField: {fileID: 0}
-    <Conditions>k__BackingField: []
-    <NodeIDOnTrue>k__BackingField: 
-    <NodeIDOnFalse>k__BackingField: 
-    <Position>k__BackingField: {x: -504, y: 530}
-  - <ID>k__BackingField: 78ed26c5-2d56-448f-8df6-63716cc747a8
-    <Name>k__BackingField: NewSingleChoice
-    <Text>k__BackingField: Now go on adventurer. The misty chest awaits you.
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <NodeID>k__BackingField: 
-    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
-    <Type>k__BackingField: 0
-    <ConditionsToBeMet>k__BackingField: 0
-    <DialogueVariableNames>k__BackingField: {fileID: 0}
-    <Conditions>k__BackingField: []
-    <NodeIDOnTrue>k__BackingField: 
-    <NodeIDOnFalse>k__BackingField: 
-    <Position>k__BackingField: {x: -517, y: -221}
-  - <ID>k__BackingField: 155aa727-36d6-4e4a-9439-fbb761609b0e
-    <Name>k__BackingField: CannotTakeTheSword2
-    <Text>k__BackingField: In order to be worthy of the sword, you must collect the
-      coin that lies on the elevated part of the plains hidden in a chest.
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <NodeID>k__BackingField: 
-    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
-    <Type>k__BackingField: 0
-    <ConditionsToBeMet>k__BackingField: 0
-    <DialogueVariableNames>k__BackingField: {fileID: 0}
-    <Conditions>k__BackingField: []
-    <NodeIDOnTrue>k__BackingField: 
-    <NodeIDOnFalse>k__BackingField: 
-    <Position>k__BackingField: {x: -668, y: -19}
   - <ID>k__BackingField: 2371ea8c-7ef4-4f56-862b-9e6aee62e10d
     <Name>k__BackingField: LastBranch
     <Text>k__BackingField: DialogueText
     <Choices>k__BackingField: []
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
     <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
     <Type>k__BackingField: 2
     <ConditionsToBeMet>k__BackingField: 0
@@ -309,6 +214,11 @@ MonoBehaviour:
     <Choices>k__BackingField:
     - <Text>k__BackingField: Next Dialogue
       <NodeID>k__BackingField: 
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
     <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
     <Type>k__BackingField: 0
     <ConditionsToBeMet>k__BackingField: 0
@@ -327,6 +237,11 @@ MonoBehaviour:
       <NodeID>k__BackingField: df93532f-a4d5-4dfb-b310-c81631db2a6f
     - <Text>k__BackingField: On second thoughts, it's not
       <NodeID>k__BackingField: ed25d311-f83e-4287-a0dd-7a16a6177138
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
     <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
     <Type>k__BackingField: 1
     <ConditionsToBeMet>k__BackingField: 0
@@ -341,6 +256,11 @@ MonoBehaviour:
     <Choices>k__BackingField:
     - <Text>k__BackingField: Next Dialogue
       <NodeID>k__BackingField: 
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
     <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
     <Type>k__BackingField: 0
     <ConditionsToBeMet>k__BackingField: 0
@@ -349,52 +269,15 @@ MonoBehaviour:
     <NodeIDOnTrue>k__BackingField: 
     <NodeIDOnFalse>k__BackingField: 
     <Position>k__BackingField: {x: 534, y: -658}
-  - <ID>k__BackingField: df93532f-a4d5-4dfb-b310-c81631db2a6f
-    <Name>k__BackingField: LittleFunny
-    <Text>k__BackingField: Okay but go get that coin. I'm getting bored.
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <NodeID>k__BackingField: 
-    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
-    <Type>k__BackingField: 0
-    <ConditionsToBeMet>k__BackingField: 0
-    <DialogueVariableNames>k__BackingField: {fileID: 0}
-    <Conditions>k__BackingField: []
-    <NodeIDOnTrue>k__BackingField: 
-    <NodeIDOnFalse>k__BackingField: 
-    <Position>k__BackingField: {x: 534, y: -491}
-  - <ID>k__BackingField: ed25d311-f83e-4287-a0dd-7a16a6177138
-    <Name>k__BackingField: NoFun
-    <Text>k__BackingField: ???
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <NodeID>k__BackingField: 129e5c82-3a77-432b-aee8-ae1214ad10df
-    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
-    <Type>k__BackingField: 0
-    <ConditionsToBeMet>k__BackingField: 0
-    <DialogueVariableNames>k__BackingField: {fileID: 0}
-    <Conditions>k__BackingField: []
-    <NodeIDOnTrue>k__BackingField: 
-    <NodeIDOnFalse>k__BackingField: 
-    <Position>k__BackingField: {x: 534, y: -304}
-  - <ID>k__BackingField: 129e5c82-3a77-432b-aee8-ae1214ad10df
-    <Name>k__BackingField: noFun2
-    <Text>k__BackingField: I guess it's better than nothing.
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <NodeID>k__BackingField: 
-    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
-    <Type>k__BackingField: 0
-    <ConditionsToBeMet>k__BackingField: 0
-    <DialogueVariableNames>k__BackingField: {fileID: 0}
-    <Conditions>k__BackingField: []
-    <NodeIDOnTrue>k__BackingField: 
-    <NodeIDOnFalse>k__BackingField: 
-    <Position>k__BackingField: {x: 843, y: -304}
   - <ID>k__BackingField: 8f6304fd-a07d-41d7-8961-36acca0b5323
     <Name>k__BackingField: SwordInteractions
     <Text>k__BackingField: DialogueText
     <Choices>k__BackingField: []
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
     <GroupID>k__BackingField: a7520f91-e24f-4a72-85b7-ac244fb212d9
     <Type>k__BackingField: 2
     <ConditionsToBeMet>k__BackingField: 0
@@ -418,6 +301,11 @@ MonoBehaviour:
     <Choices>k__BackingField:
     - <Text>k__BackingField: Next Dialogue
       <NodeID>k__BackingField: 189e30b2-2c25-4566-acd1-70bcbcebb974
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
     <GroupID>k__BackingField: a7520f91-e24f-4a72-85b7-ac244fb212d9
     <Type>k__BackingField: 0
     <ConditionsToBeMet>k__BackingField: 0
@@ -432,6 +320,11 @@ MonoBehaviour:
     <Choices>k__BackingField:
     - <Text>k__BackingField: Next Dialogue
       <NodeID>k__BackingField: d6030249-3f4b-485e-a05a-9bf9d907e914
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
     <GroupID>k__BackingField: a7520f91-e24f-4a72-85b7-ac244fb212d9
     <Type>k__BackingField: 0
     <ConditionsToBeMet>k__BackingField: 0
@@ -446,6 +339,11 @@ MonoBehaviour:
     <Choices>k__BackingField:
     - <Text>k__BackingField: Next Dialogue
       <NodeID>k__BackingField: 
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
     <GroupID>k__BackingField: a7520f91-e24f-4a72-85b7-ac244fb212d9
     <Type>k__BackingField: 0
     <ConditionsToBeMet>k__BackingField: 0
@@ -460,6 +358,11 @@ MonoBehaviour:
     <Choices>k__BackingField:
     - <Text>k__BackingField: Next Dialogue
       <NodeID>k__BackingField: 189e30b2-2c25-4566-acd1-70bcbcebb974
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
     <GroupID>k__BackingField: a7520f91-e24f-4a72-85b7-ac244fb212d9
     <Type>k__BackingField: 0
     <ConditionsToBeMet>k__BackingField: 0
@@ -468,33 +371,249 @@ MonoBehaviour:
     <NodeIDOnTrue>k__BackingField: 
     <NodeIDOnFalse>k__BackingField: 
     <Position>k__BackingField: {x: 2395, y: -15}
+  - <ID>k__BackingField: 78ed26c5-2d56-448f-8df6-63716cc747a8
+    <Name>k__BackingField: CannotTakeTheSwordRepeat
+    <Text>k__BackingField: Now go on adventurer. The misty chest awaits you.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
+    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
+    <Type>k__BackingField: 0
+    <ConditionsToBeMet>k__BackingField: 0
+    <DialogueVariableNames>k__BackingField: {fileID: 0}
+    <Conditions>k__BackingField: []
+    <NodeIDOnTrue>k__BackingField: 
+    <NodeIDOnFalse>k__BackingField: 
+    <Position>k__BackingField: {x: -492, y: -257}
+  - <ID>k__BackingField: df93532f-a4d5-4dfb-b310-c81631db2a6f
+    <Name>k__BackingField: LittleFunny
+    <Text>k__BackingField: Okay but go get that coin. I'm getting bored.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
+    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
+    <Type>k__BackingField: 0
+    <ConditionsToBeMet>k__BackingField: 0
+    <DialogueVariableNames>k__BackingField: {fileID: 0}
+    <Conditions>k__BackingField: []
+    <NodeIDOnTrue>k__BackingField: 
+    <NodeIDOnFalse>k__BackingField: 
+    <Position>k__BackingField: {x: 534, y: -445}
+  - <ID>k__BackingField: ed25d311-f83e-4287-a0dd-7a16a6177138
+    <Name>k__BackingField: NoFun
+    <Text>k__BackingField: ???
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 129e5c82-3a77-432b-aee8-ae1214ad10df
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
+    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
+    <Type>k__BackingField: 0
+    <ConditionsToBeMet>k__BackingField: 0
+    <DialogueVariableNames>k__BackingField: {fileID: 0}
+    <Conditions>k__BackingField: []
+    <NodeIDOnTrue>k__BackingField: 
+    <NodeIDOnFalse>k__BackingField: 
+    <Position>k__BackingField: {x: 534, y: -234}
+  - <ID>k__BackingField: 129e5c82-3a77-432b-aee8-ae1214ad10df
+    <Name>k__BackingField: noFun2
+    <Text>k__BackingField: I guess it's better than nothing.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
+    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
+    <Type>k__BackingField: 0
+    <ConditionsToBeMet>k__BackingField: 0
+    <DialogueVariableNames>k__BackingField: {fileID: 0}
+    <Conditions>k__BackingField: []
+    <NodeIDOnTrue>k__BackingField: 
+    <NodeIDOnFalse>k__BackingField: 
+    <Position>k__BackingField: {x: 843, y: -234}
+  - <ID>k__BackingField: 00cdec9e-abc2-4013-9c80-7b83a732d486
+    <Name>k__BackingField: CannotTakeTheSword
+    <Text>k__BackingField: It seems you cannot take the sword yet.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 155aa727-36d6-4e4a-9439-fbb761609b0e
+    <HasAuthor>k__BackingField: 1
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 11400000, guid: dc4d0e191439ca748b2712376ab14720, type: 2}
+      <ShowMugshot>k__BackingField: 1
+      <Emotion>k__BackingField: Default
+    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
+    <Type>k__BackingField: 0
+    <ConditionsToBeMet>k__BackingField: 0
+    <DialogueVariableNames>k__BackingField: {fileID: 0}
+    <Conditions>k__BackingField: []
+    <NodeIDOnTrue>k__BackingField: 
+    <NodeIDOnFalse>k__BackingField: 
+    <Position>k__BackingField: {x: -1013, y: -75}
+  - <ID>k__BackingField: 0a124c2f-be16-4037-a78c-09aba6cf4e5d
+    <Name>k__BackingField: CollectingSword
+    <Text>k__BackingField: Whereas you still feel unworthy of the sword, you reflect
+      about taking possesion of it. You are unaware of the responsabilities that
+      are coming along with it.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 9188b31d-dae4-44c2-86f2-fdbf27d85078
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 11400000, guid: dc4d0e191439ca748b2712376ab14720, type: 2}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
+    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
+    <Type>k__BackingField: 0
+    <ConditionsToBeMet>k__BackingField: 0
+    <DialogueVariableNames>k__BackingField: {fileID: 0}
+    <Conditions>k__BackingField: []
+    <NodeIDOnTrue>k__BackingField: 
+    <NodeIDOnFalse>k__BackingField: 
+    <Position>k__BackingField: {x: -1287, y: 381}
+  - <ID>k__BackingField: f7ca2224-a666-4d9e-b21d-dc23216a4372
+    <Name>k__BackingField: TakingTheSword
+    <Text>k__BackingField: You choose to take the sword.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: fd1bab72-dff8-4fe8-97f9-17a69cc5d2dd
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
+    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
+    <Type>k__BackingField: 0
+    <ConditionsToBeMet>k__BackingField: 0
+    <DialogueVariableNames>k__BackingField: {fileID: 0}
+    <Conditions>k__BackingField: []
+    <NodeIDOnTrue>k__BackingField: 
+    <NodeIDOnFalse>k__BackingField: 
+    <Position>k__BackingField: {x: -524, y: 381}
+  - <ID>k__BackingField: fd1bab72-dff8-4fe8-97f9-17a69cc5d2dd
+    <Name>k__BackingField: TakingTheSword2
+    <Text>k__BackingField: Unfortunately, the developer did nothing about it.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 50807d23-24f6-40d8-a4b0-131f0e6072d3
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
+    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
+    <Type>k__BackingField: 0
+    <ConditionsToBeMet>k__BackingField: 0
+    <DialogueVariableNames>k__BackingField: {fileID: 0}
+    <Conditions>k__BackingField: []
+    <NodeIDOnTrue>k__BackingField: 
+    <NodeIDOnFalse>k__BackingField: 
+    <Position>k__BackingField: {x: -228, y: 338}
+  - <ID>k__BackingField: 50807d23-24f6-40d8-a4b0-131f0e6072d3
+    <Name>k__BackingField: TheEnd
+    <Text>k__BackingField: In the end, you still interacted with the sword.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
+    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
+    <Type>k__BackingField: 0
+    <ConditionsToBeMet>k__BackingField: 0
+    <DialogueVariableNames>k__BackingField: {fileID: 0}
+    <Conditions>k__BackingField: []
+    <NodeIDOnTrue>k__BackingField: 
+    <NodeIDOnFalse>k__BackingField: 
+    <Position>k__BackingField: {x: 284, y: 714}
+  - <ID>k__BackingField: 9188b31d-dae4-44c2-86f2-fdbf27d85078
+    <Name>k__BackingField: CollectingSwordChoice
+    <Text>k__BackingField: 'Do you want to collect the sword?
+
+      Be careful,
+      there is no going back!'
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Take the sword
+      <NodeID>k__BackingField: f7ca2224-a666-4d9e-b21d-dc23216a4372
+    - <Text>k__BackingField: Refuse
+      <NodeID>k__BackingField: 4aec4b1c-6a94-4581-8eab-3a736271ed71
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
+    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
+    <Type>k__BackingField: 1
+    <ConditionsToBeMet>k__BackingField: 0
+    <DialogueVariableNames>k__BackingField: {fileID: 0}
+    <Conditions>k__BackingField: []
+    <NodeIDOnTrue>k__BackingField: 
+    <NodeIDOnFalse>k__BackingField: 
+    <Position>k__BackingField: {x: -968, y: 714}
+  - <ID>k__BackingField: 4aec4b1c-6a94-4581-8eab-3a736271ed71
+    <Name>k__BackingField: Refusing
+    <Text>k__BackingField: You refused to take the sword. Because of your wiseness
+      or cowardice? Nobody will ever know.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 50807d23-24f6-40d8-a4b0-131f0e6072d3
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
+    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
+    <Type>k__BackingField: 0
+    <ConditionsToBeMet>k__BackingField: 0
+    <DialogueVariableNames>k__BackingField: {fileID: 0}
+    <Conditions>k__BackingField: []
+    <NodeIDOnTrue>k__BackingField: 
+    <NodeIDOnFalse>k__BackingField: 
+    <Position>k__BackingField: {x: -541, y: 714}
+  - <ID>k__BackingField: 155aa727-36d6-4e4a-9439-fbb761609b0e
+    <Name>k__BackingField: CannotTakeTheSword2
+    <Text>k__BackingField: In order to be worthy of the sword, you must collect the
+      coin that lies on the elevated part of the plains hidden in a chest.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 
+    <HasAuthor>k__BackingField: 1
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 11400000, guid: dc4d0e191439ca748b2712376ab14720, type: 2}
+      <ShowMugshot>k__BackingField: 1
+      <Emotion>k__BackingField: Default
+    <GroupID>k__BackingField: 87d19035-7032-437e-8726-4e114e9c3c3a
+    <Type>k__BackingField: 0
+    <ConditionsToBeMet>k__BackingField: 0
+    <DialogueVariableNames>k__BackingField: {fileID: 0}
+    <Conditions>k__BackingField: []
+    <NodeIDOnTrue>k__BackingField: 
+    <NodeIDOnFalse>k__BackingField: 
+    <Position>k__BackingField: {x: -672, y: -33}
   <OldGroupNames>k__BackingField:
   - CollectingSword
   - CoinCollect
   <OldUngroupedNodeNames>k__BackingField: []
   <OldGroupedNodeNames>k__BackingField:
     list:
-    - Key: CollectingSword
-      Value:
-      - CollectingSword
-      - TakingTheSword
-      - TheEnd
-      - CollectingSwordChoice
-      - NewConditionalBranch
-      - FirstConditionalBranch
-      - 2ndConditionalBranch
-      - CannotTakeTheSword
-      - TakingTheSword2
-      - Refusing
-      - NewSingleChoice
-      - CannotTakeTheSword2
-      - LastBranch
-      - Nothing
-      - NewMultipleChoice
-      - Funny
-      - LittleFunny
-      - NoFun
-      - noFun2
     - Key: CoinCollect
       Value:
       - AlreadyGotCoin2
@@ -506,3 +625,24 @@ MonoBehaviour:
       - CoinCollected2
       - CoinCollected3
       - CoinCollected1
+    - Key: CollectingSword
+      Value:
+      - NewConditionalBranch
+      - FirstConditionalBranch
+      - 2ndConditionalBranch
+      - LastBranch
+      - Nothing
+      - NewMultipleChoice
+      - Funny
+      - CannotTakeTheSwordRepeat
+      - LittleFunny
+      - NoFun
+      - noFun2
+      - CannotTakeTheSword
+      - CollectingSword
+      - TakingTheSword
+      - TakingTheSword2
+      - TheEnd
+      - CollectingSwordChoice
+      - Refusing
+      - CannotTakeTheSword2

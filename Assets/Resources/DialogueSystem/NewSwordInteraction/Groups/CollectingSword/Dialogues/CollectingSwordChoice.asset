@@ -23,4 +23,9 @@ MonoBehaviour:
     <NextDialogue>k__BackingField: {fileID: 11400000, guid: bd0ba3ac0e82b6545af23237ae25832a, type: 2}
   - <Text>k__BackingField: Refuse
     <NextDialogue>k__BackingField: {fileID: 11400000, guid: 4b6c7196d39369d47a9f5d5cbc299390, type: 2}
+  <HasAuthor>k__BackingField: 0
+  <AuthorDecorator>k__BackingField:
+    <AuthorData>k__BackingField: {fileID: 0}
+    <ShowMugshot>k__BackingField: 0
+    <Emotion>k__BackingField: Default
   <Type>k__BackingField: 1

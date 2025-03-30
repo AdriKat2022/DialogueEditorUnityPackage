@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -286,6 +286,7 @@ MonoBehaviour:
   _delayBetweenOptionsAnimation: 0.1
   _resetStoryOnDialogueStart: 1
   _titleTextContainer: {fileID: 5161496943973686034}
+  _mugshotImage: {fileID: 2094343641224518983}
   _titleText: {fileID: 8918493252161884119}
   _mainText: {fileID: 2927358558692814946}
   _continueAction: {fileID: 7996208002420756985, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

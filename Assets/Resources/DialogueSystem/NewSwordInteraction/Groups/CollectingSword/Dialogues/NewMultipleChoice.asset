@@ -22,4 +22,9 @@ MonoBehaviour:
     <NextDialogue>k__BackingField: {fileID: 11400000, guid: 5324978002266874d886e61b3b9469c4, type: 2}
   - <Text>k__BackingField: On second thoughts, it's not
     <NextDialogue>k__BackingField: {fileID: 11400000, guid: e8b3ba199493e3541aa6963e0d479739, type: 2}
+  <HasAuthor>k__BackingField: 0
+  <AuthorDecorator>k__BackingField:
+    <AuthorData>k__BackingField: {fileID: 0}
+    <ShowMugshot>k__BackingField: 0
+    <Emotion>k__BackingField: Default
   <Type>k__BackingField: 1

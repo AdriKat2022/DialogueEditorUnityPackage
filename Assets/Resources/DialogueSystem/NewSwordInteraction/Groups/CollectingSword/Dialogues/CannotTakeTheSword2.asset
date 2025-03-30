@@ -19,4 +19,9 @@ MonoBehaviour:
   <Choices>k__BackingField:
   - <Text>k__BackingField: Next Dialogue
     <NextDialogue>k__BackingField: {fileID: 0}
+  <HasAuthor>k__BackingField: 1
+  <AuthorDecorator>k__BackingField:
+    <AuthorData>k__BackingField: {fileID: 11400000, guid: dc4d0e191439ca748b2712376ab14720, type: 2}
+    <ShowMugshot>k__BackingField: 1
+    <Emotion>k__BackingField: Default
   <Type>k__BackingField: 0

@@ -9,6 +9,11 @@ using UnityEngine.UI;
 
 namespace AdriKat.DialogueSystem.Core
 {
+    /// <summary>
+    /// This controller class is an example of how to use the dialogue system.
+    /// It essentially works great for a default behaviour.
+    /// Don't hesitate to copy this class and modify it to your needs if you want to.
+    /// </summary>
     public class DialogueController : MonoBehaviour
     {
         [Header("Animations")]
@@ -21,6 +26,7 @@ namespace AdriKat.DialogueSystem.Core
 
         [Header("References")]
         [SerializeField] private GameObject _titleTextContainer;
+        [SerializeField] private Image _mugshotImage;
         [SerializeField] private TextMeshProUGUI _titleText;
         [SerializeField] private TextMeshProUGUI _mainText;
         [Space]
@@ -116,11 +122,21 @@ namespace AdriKat.DialogueSystem.Core
                     yield break;
                 }
 
-                _titleText.text = "";
-                _mainText.text = currentDialogueBubble.Text;
+                bool shouldDisplayAuthor = currentDialogueBubble.HasAuthor && currentDialogueBubble.AuthorDecorator.AuthorData != null;
 
-                // If the title text begins with // then hide the title text container
-                _titleTextContainer.SetActive(!string.IsNullOrEmpty(_titleText.text) && !_titleText.text.StartsWith("//"));
+                _titleTextContainer.SetActive(shouldDisplayAuthor);
+                _mugshotImage.gameObject.SetActive(shouldDisplayAuthor && currentDialogueBubble.AuthorDecorator.ShowMugshot);
+                if (shouldDisplayAuthor)
+                {
+                    _titleText.text = currentDialogueBubble.AuthorDecorator.AuthorData.Name;
+
+                    if (currentDialogueBubble.AuthorDecorator.ShowMugshot)
+                    {
+                        string mugshotSprite = currentDialogueBubble.AuthorDecorator.Emotion;
+                        _mugshotImage.sprite = currentDialogueBubble.AuthorDecorator.AuthorData.Sprites[mugshotSprite];
+                    }
+                }
+                _mainText.text = currentDialogueBubble.Text;
 
                 LayoutRebuilder.ForceRebuildLayoutImmediate(_rectTransform);
 
