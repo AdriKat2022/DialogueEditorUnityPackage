@@ -10,6 +10,9 @@ It is designed to be quickly design simple dialogue systems for games inside Uni
 7. Click on "Install"
 8. Enjoy!
 
+> If you wish to install a particular version, you can append `#[tagname]` at the end of the URL.  
+For example, to install the version tagged by `v1.0.2`, use the url:
+`git+https://github.com/AdriKat2022/DialogueSystemUnityPackage.git#v1.0.2`
 
 # Usage
 1. Open the Dialogue System Editor window `(Window -> Dialogue System Editor)`
@@ -107,6 +110,7 @@ I don't know yet, but I'll find a way to make it better!
 
 # Future Features
 - [ ] Confirmation dialog when saving, loading, overwritting or quitting without saving
+- [ ] Author selection per dialogue node (an author is described by a name, a mugshot, voice lines, color etc.)
 
 # Known Issues
 I'm not aware of any major issue, but I'm sure there are some!

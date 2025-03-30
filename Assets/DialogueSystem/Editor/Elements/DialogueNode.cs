@@ -19,8 +19,7 @@ namespace AdriKat.DialogueSystem.Elements
         [field: SerializeField] public string DialogueText { get; set; }
         [field: SerializeField] public List<DialogueChoiceSaveData> Choices { get; set; }
         [field: SerializeField] public bool HasAuthor { get; set; }
-        [field: SerializeField] public DialogueAuthorData Author { get; set; }
-        [field: SerializeField] public string AuthorEmotion { get; set; }
+        [field: SerializeField] public DialogueAuthorData AuthorDecorator { get; set; }
         [field: SerializeField] public DialogueType Type { get; set; }
         [field: SerializeField] public DialogueGroup Group { get; set; }
 
@@ -35,7 +34,7 @@ namespace AdriKat.DialogueSystem.Elements
             ID = Guid.NewGuid().ToString();
             DialogueName = nodeName;
             Choices = new List<DialogueChoiceSaveData>();
-            Author = new DialogueAuthorData();
+            AuthorDecorator = new DialogueAuthorData();
             DialogueText = "DialogueText";
 
             defaultBackgroundColor = new Color(29 / 255f, 29 / 255f, 30 / 255f);
@@ -75,7 +74,7 @@ namespace AdriKat.DialogueSystem.Elements
             }
         }
 
-
+        #region Draw Methods
         protected virtual void DrawInputPorts()
         {
             // Input container
@@ -177,7 +176,7 @@ namespace AdriKat.DialogueSystem.Elements
                     DialogueAuthorSO newAuthor = DialogueIOUtility.CreateAsset<DialogueAuthorSO>(path, "DefaultAuthor");
                     newAuthor.Name = "DefaultAuthor";
                     DialogueIOUtility.SaveAsset(newAuthor);
-                    Author.AuthorData = newAuthor;
+                    AuthorDecorator.AuthorData = newAuthor;
                     EditorApplication.delayCall += () => RefreshUI();
                 });
 
@@ -193,21 +192,18 @@ namespace AdriKat.DialogueSystem.Elements
                 .Where(author => author != null)
                 .ToArray();
 
-            if (Author.AuthorData == null)
+            if (AuthorDecorator.AuthorData == null)
             {
-                Author.AuthorData = authors[0];
+                AuthorDecorator.AuthorData = authors[0];
             }
 
             // Extract names for the dropdown
             List<string> authorNames = authors.Select(a => a.name).ToList();
 
             // DropdownField for selecting an author
-            int indexOfCurrentAuthor = Array.IndexOf(authorNames.ToArray(), Author.AuthorData.name);
-            DropdownField authorDropdown = new(authorNames, indexOfCurrentAuthor);
+            DropdownField authorDropdown = new(authorNames, AuthorDecorator.AuthorData.name);
             authorDropdown.AddToClassList("ds-node__dropdown");
             authorFoldout.Add(authorDropdown);
-
-            // Handle selection change
             authorDropdown.RegisterValueChangedCallback(evt =>
             {
                 string selectedAuthorName = evt.newValue;
@@ -215,48 +211,65 @@ namespace AdriKat.DialogueSystem.Elements
 
                 if (selectedAuthor == null)
                 {
-                    Debug.LogError("The selected author doesn't exist anymore!");
+                    Debug.LogError("The selected author doesn't exist anymore!\nThis can happen if you changed the object's filename.");
                     return;
                 }
 
-                Author.AuthorData = selectedAuthor;
+                AuthorDecorator.AuthorData = selectedAuthor;
                 RefreshUI();
             });
 
-            // Make a dropdown for the available emotions for the selected author and draw the selected one
-            Foldout authorEmotionFoldout = DialogueElementUtility.CreateFoldout("Text Emotion");
-            authorEmotionFoldout.AddToClassList("ds-node__foldout");
-            authorFoldout.Add(authorEmotionFoldout);
-
-            var authorEmotions = Author.AuthorData.Sprites.Keys;
-
-            if (authorEmotions.Count == 0)
+            Toggle showMugshotToggle = new("Show Mugshot")
             {
-                string authorPath = AssetDatabase.GetAssetPath(Author.AuthorData);
-                authorEmotionFoldout.AddHelpBox($"No emotion found for this author.\nYou can add some in the Author ScriptableObject at\n\"{authorPath}\".", HelpBoxMessageType.Info);
+                value = AuthorDecorator.ShowMugshot
+            };
+            showMugshotToggle.AddToClassList("ds-node__toggle");
+            showMugshotToggle.RegisterValueChangedCallback(evt =>
+            {
+                AuthorDecorator.ShowMugshot = evt.newValue;
+                RefreshUI();
+            });
+            authorFoldout.Add(showMugshotToggle);
+
+            if (!AuthorDecorator.ShowMugshot)
+            {
                 return;
             }
 
-            if (string.IsNullOrEmpty(AuthorEmotion))
+            // Make a dropdown for the available emotions for the selected author and draw the selected one
+            Foldout authorEmotionFoldout = DialogueElementUtility.CreateFoldout("Mugshot Emotion");
+            authorEmotionFoldout.AddToClassList("ds-node__foldout");
+            authorFoldout.Add(authorEmotionFoldout);
+
+            var authorEmotions = AuthorDecorator.AuthorData.Sprites.Keys;
+
+            if (authorEmotions.Count == 0)
             {
-                AuthorEmotion = authorEmotions.First();
+                string authorPath = AssetDatabase.GetAssetPath(AuthorDecorator.AuthorData);
+                authorEmotionFoldout.AddHelpBox($"No emotion found for this author.\nYou can add some in the Author ScriptableObject at\n\"{authorPath}\".", HelpBoxMessageType.Warning);
+                return;
             }
 
-            DropdownField authorEmotionDropdown = new(authorEmotions.ToList(), AuthorEmotion);
+            if (string.IsNullOrEmpty(AuthorDecorator.Emotion))
+            {
+                AuthorDecorator.Emotion = authorEmotions.First();
+            }
+
+            DropdownField authorEmotionDropdown = new(authorEmotions.ToList(), AuthorDecorator.Emotion);
             authorEmotionDropdown.AddToClassList("ds-node__dropdown");
             authorEmotionDropdown.RegisterValueChangedCallback(evt =>
             {
-                AuthorEmotion = evt.newValue;
+                AuthorDecorator.Emotion = evt.newValue;
                 RefreshUI();
             });
             authorEmotionFoldout.Add(authorEmotionDropdown);
 
             // Draw the selected emotion
-            if (Author.AuthorData.Sprites.TryGetValue(AuthorEmotion, out Sprite authorEmotionSprite))
+            if (AuthorDecorator.AuthorData.Sprites.TryGetValue(AuthorDecorator.Emotion, out Sprite authorEmotionSprite))
             {
                 if (authorEmotionSprite == null)
                 {
-                    authorEmotionFoldout.AddHelpBox($"This emotion ({AuthorEmotion}) doesn't have any sprite.", HelpBoxMessageType.Warning);
+                    authorEmotionFoldout.AddHelpBox($"This emotion ({AuthorDecorator.Emotion}) doesn't have any sprite.\nMugshot will be disabled.", HelpBoxMessageType.Info);
                     return;
                 }
                 Image authorEmotionImage = new()
@@ -268,7 +281,7 @@ namespace AdriKat.DialogueSystem.Elements
             else
             {
                 // Make warning helpbox
-                authorEmotionFoldout.AddHelpBox($"This emotion ({AuthorEmotion}) doesn't exist anymore!\nPlease select another one.", HelpBoxMessageType.Error);
+                authorEmotionFoldout.AddHelpBox($"This emotion ({AuthorDecorator.Emotion}) doesn't exist anymore!\nPlease select another one.", HelpBoxMessageType.Error);
             }
         }
 
@@ -292,8 +305,6 @@ namespace AdriKat.DialogueSystem.Elements
                 );
             textFoldout.Add(textTextField);
         }
-
-        #region Draw Methods
 
         private void RefreshUI()
         {

@@ -10,15 +10,17 @@ namespace AdriKat.DialogueSystem.Data
     {
         [field: SerializeField, TextArea()] public string Text { get; set; }
         [field: SerializeField] public List<DialogueChoiceData> Choices { get; set; }
-        [field: SerializeField] public DialogueAuthorData Author { get; set; }
+        [field: SerializeField] public bool HasAuthor { get; set; }
+        [field: SerializeField] public DialogueAuthorData AuthorDecorator { get; set; }
         [field: SerializeField] public DialogueType Type { get; set; }
 
-        public void Initialize(string dialogueName, string text, List<DialogueChoiceData> choices, DialogueAuthorData author, DialogueType dialogueType, bool isStartingDialogue)
+        public void Initialize(string dialogueName, string text, List<DialogueChoiceData> choices, bool hasAuthor, DialogueAuthorData authorDecorator, DialogueType dialogueType, bool isStartingDialogue)
         {
             DialogueName = dialogueName;
             Text = text;
             Choices = choices;
-            Author = author;
+            HasAuthor = hasAuthor;
+            AuthorDecorator = authorDecorator;
             Type = dialogueType;
             IsStartingDialogue = isStartingDialogue;
         }

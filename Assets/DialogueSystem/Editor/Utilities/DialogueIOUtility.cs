@@ -198,6 +198,8 @@ namespace AdriKat.DialogueSystem.Utility
                 ID = node.ID,
                 Name = node.DialogueName,
                 Choices = CloneChoices(node.Choices),
+                HasAuthor = node.HasAuthor,
+                AuthorDecorator = node.AuthorDecorator,
                 Text = node.DialogueText,
                 Type = node.Type,
                 GroupID = node.Group?.ID,
@@ -236,7 +238,8 @@ namespace AdriKat.DialogueSystem.Utility
                 node.DialogueName,
                 node.DialogueText,
                 ConvertNodeChoicesToDialogueChoices(node.Choices),
-                null, // Save the author of the node
+                node.HasAuthor,
+                node.AuthorDecorator,
                 node.Type,
                 node.IsStartingNode()
             );
@@ -426,6 +429,8 @@ namespace AdriKat.DialogueSystem.Utility
                 else if (node is DialogueNode executableNode)
                 {
                     executableNode.Choices = CloneChoices(nodeData.Choices);
+                    executableNode.HasAuthor = nodeData.HasAuthor;
+                    executableNode.AuthorDecorator = nodeData.AuthorDecorator;
                     executableNode.DialogueText = nodeData.Text;
                 }
 

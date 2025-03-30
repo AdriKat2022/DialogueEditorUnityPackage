@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c54bab28a1cbdf4bb919abb2366b71b, type: 3}
+  m_Name: NewMultipleChoice
+  m_EditorClassIdentifier: 
+  <DialogueName>k__BackingField: NewMultipleChoice
+  <IsStartingDialogue>k__BackingField: 0
+  <Text>k__BackingField: Oh come on!! Go get that coin now! You find this funny??
+  <Choices>k__BackingField:
+  - <Text>k__BackingField: Yes it's funny
+    <NextDialogue>k__BackingField: {fileID: 11400000, guid: d3db41380870ca747a47c9ecb90f24dc, type: 2}
+  - <Text>k__BackingField: Just a little
+    <NextDialogue>k__BackingField: {fileID: 11400000, guid: 740bcff5488505643a5972279301cbc6, type: 2}
+  - <Text>k__BackingField: On second thoughts, it's not
+    <NextDialogue>k__BackingField: {fileID: 11400000, guid: d756fa9bad1f2cd4297db157d77f16e6, type: 2}
+  <HasAuthor>k__BackingField: 0
+  <AuthorDecorator>k__BackingField:
+    <AuthorData>k__BackingField: {fileID: 0}
+    <ShowMugshot>k__BackingField: 0
+    <Emotion>k__BackingField: Default
+  <Type>k__BackingField: 1

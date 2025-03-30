@@ -1,17 +1,20 @@
 using AdriKat.DialogueSystem.Enumerations;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace AdriKat.DialogueSystem.Data
 {
     // Not that great, the data needed by the exectuable dialogues and the conditional branches are untangled
-    [System.Serializable]
+    [Serializable]
     public class DialogueNodeSaveData
     {
         [field: SerializeField] public string ID { get; set; }
         [field: SerializeField] public string Name { get; set; }
         [field: SerializeField] public string Text { get; set; }
         [field: SerializeField] public List<DialogueChoiceSaveData> Choices { get; set; }
+        [field: SerializeField] public bool HasAuthor { get; set; }
+        [field: SerializeField] public DialogueAuthorData AuthorDecorator { get; set; }
         [field: SerializeField] public string GroupID { get; set; }
         [field: SerializeField] public DialogueType Type { get; set; }
         [field: SerializeField] public ConditionType ConditionsToBeMet { get; set; }
