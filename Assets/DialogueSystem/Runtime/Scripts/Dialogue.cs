@@ -31,6 +31,13 @@ namespace AdriKat.DialogueSystem.Core
         #region Initialization Methods
         private void Awake()
         {
+            if (_dialogueContainer == null || _dialogue == null)
+            {
+                Debug.LogError("DialogueSystem: Dialogue Container or Dialogue is not selected in the Dialogue script.", gameObject);
+                enabled = false;
+                return;
+            }
+
             ResetToFirstDialogue();
         }
         #endregion
