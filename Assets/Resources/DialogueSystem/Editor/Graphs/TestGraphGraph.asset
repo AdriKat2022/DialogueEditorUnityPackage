@@ -18,20 +18,6 @@ MonoBehaviour:
     <Name>k__BackingField: DialogueGroup
     <Position>k__BackingField: {x: 245, y: 150}
   <Nodes>k__BackingField:
-  - <ID>k__BackingField: 80378f60-5cc9-47c1-8d9d-e3747f9162ba
-    <Name>k__BackingField: NewSingleChoice
-    <Text>k__BackingField: DialogueText
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <NodeID>k__BackingField: 
-    <GroupID>k__BackingField: 
-    <Type>k__BackingField: 0
-    <ConditionsToBeMet>k__BackingField: 0
-    <DialogueVariableNames>k__BackingField: {fileID: 0}
-    <Conditions>k__BackingField: []
-    <NodeIDOnTrue>k__BackingField: 
-    <NodeIDOnFalse>k__BackingField: 
-    <Position>k__BackingField: {x: 656, y: 81}
   - <ID>k__BackingField: 9fb4fd07-8561-4f48-a65f-60c94cf67a6b
     <Name>k__BackingField: NewMultipleChoice
     <Text>k__BackingField: DialogueText
@@ -40,6 +26,11 @@ MonoBehaviour:
       <NodeID>k__BackingField: 80378f60-5cc9-47c1-8d9d-e3747f9162ba
     - <Text>k__BackingField: New Choice
       <NodeID>k__BackingField: ed43fc20-f5cf-412c-9595-6ab60b5addb6
+    <HasAuthor>k__BackingField: 1
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 11400000, guid: dc4d0e191439ca748b2712376ab14720, type: 2}
+      <ShowMugshot>k__BackingField: 1
+      <Emotion>k__BackingField: Default
     <GroupID>k__BackingField: 
     <Type>k__BackingField: 1
     <ConditionsToBeMet>k__BackingField: 0
@@ -52,6 +43,11 @@ MonoBehaviour:
     <Name>k__BackingField: NewConditionalBranch
     <Text>k__BackingField: DialogueText
     <Choices>k__BackingField: []
+    <HasAuthor>k__BackingField: 0
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 0}
+      <ShowMugshot>k__BackingField: 0
+      <Emotion>k__BackingField: Default
     <GroupID>k__BackingField: 
     <Type>k__BackingField: 2
     <ConditionsToBeMet>k__BackingField: 0
@@ -69,11 +65,30 @@ MonoBehaviour:
     <NodeIDOnTrue>k__BackingField: 
     <NodeIDOnFalse>k__BackingField: 
     <Position>k__BackingField: {x: 626, y: 380}
+  - <ID>k__BackingField: 80378f60-5cc9-47c1-8d9d-e3747f9162ba
+    <Name>k__BackingField: NewSingleChoice
+    <Text>k__BackingField: DialogueText
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 
+    <HasAuthor>k__BackingField: 1
+    <AuthorDecorator>k__BackingField:
+      <AuthorData>k__BackingField: {fileID: 11400000, guid: dc4d0e191439ca748b2712376ab14720, type: 2}
+      <ShowMugshot>k__BackingField: 1
+      <Emotion>k__BackingField: Default
+    <GroupID>k__BackingField: 
+    <Type>k__BackingField: 0
+    <ConditionsToBeMet>k__BackingField: 0
+    <DialogueVariableNames>k__BackingField: {fileID: 0}
+    <Conditions>k__BackingField: []
+    <NodeIDOnTrue>k__BackingField: 
+    <NodeIDOnFalse>k__BackingField: 
+    <Position>k__BackingField: {x: 621, y: 8}
   <OldGroupNames>k__BackingField:
   - DialogueGroup
   <OldUngroupedNodeNames>k__BackingField:
-  - NewSingleChoice
   - NewMultipleChoice
   - NewConditionalBranch
+  - NewSingleChoice
   <OldGroupedNodeNames>k__BackingField:
     list: []

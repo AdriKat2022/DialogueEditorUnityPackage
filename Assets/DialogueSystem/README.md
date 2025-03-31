@@ -19,13 +19,16 @@ For example, to install the version tagged by `v1.0.2`, use the url:
 2. Create nodes by right-clicking
 3. Make dialogues!
 
-Save with the "Save" button and load with the "Load" button.
-Warning: There is no confirmation dialog yet when saving, loading, overwritting or quitting without saving so be careful to save each time!
+Save with the "Save" button and load with the "Load" button.  
+Warning: There is no confirmation dialog yet when saving, loading or quitting without saving so be careful to save each time!
 
 # Features
-- Single Nodes
-- Multiple Nodes (nodes with choices)
-- Conditional Nodes (nodes with conditions)
+- [Single Nodes](#single-nodes) (basic nodes)
+- [Multiple Nodes](#multiple-nodes) (nodes with choices)
+- [Conditional Nodes](#conditional-nodes) (nodes with conditions)
+- [Authors](#authors) (usable by any node that can displays text)
+
+> All nodes that display text can have an author. See the [Authors](#authors) section below.
 
 ## Single Nodes
 Single nodes are the most basic nodes.  
@@ -108,9 +111,55 @@ I'm sorry for the inconvenience, I'm working on it.
 Maybe generating at compilation or on prompt a enum with the variable names for instance?  
 I don't know yet, but I'll find a way to make it better!  
 
+## Authors
+Authors are a way to add a name to the text of a node.  
+They are not mandatory, but they can be useful to identify who is speaking.  
+You can add any author to any node that displays text.  
+All the author's info is stored in the `DialogueSO.AuthorDecorator.AuthorData` field of the scriptable object. It should be guaranteed to be not null if `DialogueSO.HasAuthor` is true in normal usage.
+
+### Creation and localization
+**To create an author:**
+1. Go to the folder `Assets/Resources/DialogueSystem/Authors` or create it if it doesn't exist.
+2. Right Click `New -> Dialogue System -> Dialogue Author` and fill in the fields.  
+
+Alternatively, a button `Create Author` is shown if no author exists yet and the toggle `Has an author` of a dialogue node is checked. It will create a new author in the `Assets/Resources/DialogueSystem/Authors` folder.
+
+**To select an existing author:**
+- Simply select the author you want in the dropdown list of the node.
+
+> If the author you seek is not in the list, check that the author is in the `Assets/Resources/DialogueSystem/Authors` folder. **The name that appears in the dropdown list is the name of the filename, not the author** (planning to change this in the future).
+
+- **Enable or disable mugshot:** Once an author is selected, you can then choose if you want to display the mugshot of the author or not.
+
+> If no mugshot is available for the selected author, the mugshot will be null, the node will show you a warning and this checkbox will be disabled.
+
+- **Select the emotion:** If the mugshot is displayed, choose the emotion of the author in the dropdown list. This will change the mugshot displayed in the dialogue box. The mugshot will be null if there is no mugshot for the selected emotion. The currently selected emotion sprite is previewed in the node.
+
+### Composition of an Author
+An author is currently composed of:
+- `string` **Name:** The name of the author. This is what could be displayed as the dialogue box's title.
+- `Dict<string, Sprite>` **Sprites:** Dictionnary of sprites of the author that serves as different mugshot expressions. Each identified by strings.
+
+> Authors are currently **immutable** from the nodes. This means those can only be modified from the author scriptable object itself.  
+This is to prevent any confusion when using the same author in multiple nodes.
+
+> **TO NOT BE MISTAKEN WITH A [`AuthorDecorator`](#composition-of-an-authordecorator) THAT ON THE CONTRARY IS MUTABLE.**
+
+### Composition of an AuthorDecorator
+Present in the `DialogueSO` class, the `AuthorDecorator` is a way to add an author to a node.  
+It is a simple class that contains the following fields:
+An authorDecorator is currently composed of:
+- `bool` **HasAuthor:** Whether the node has an author or not. This is used to display the author name in the dialogue box. Usually guarentees a non-null author if this is true.
+- [`Author`](#composition-of-an-author) **Author:** The author associated to this dialogue.
+- `bool` **HasMugshot:** Whether the node wants to display a mugshot or not. This is used to display the mugshot in the dialogue box. Does **NOT** guarentees a non-null mugshot even if this is true.
+- `string` **Emotion:** Name of the emotion of the author to display. This is used to display the mugshot in the dialogue box. This is a string that corresponds to the name of the sprite in the list of sprites of the author.
+
 # Future Features
-- [ ] Confirmation dialog when saving, loading, overwritting or quitting without saving
-- [ ] Author selection per dialogue node (an author is described by a name, a mugshot, voice lines, color etc.)
+- [ ] Confirmation dialog when saving, loading or quitting without saving
+- [ ] More Author data (voice lines, color or more)
+- [ ] Improve author-usage clarity (name of the author instead of the filename, better documentation and ready-to-call functions for basic operations)
+- [ ] Overridable options for easy title and mugshot settings (for example, if you want to set the title and mugshot of the dialogue box in the node directly, you could do it easily without having to go through the author scriptable object)
+- [ ] Add a way to create a new author directly from the node (currently, you have to create it in the `Assets/Resources/DialogueSystem/Authors` folder with a right click - considering a button in the node itself or a whole new window for author creation and management)
 
 # Known Issues
 I'm not aware of any major issue, but I'm sure there are some!

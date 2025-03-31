@@ -24,9 +24,10 @@ namespace AdriKat.DialogueSystem.Elements
         [field: SerializeField] public DialogueGroup Group { get; set; }
 
         protected DialogueGraphView graphView;
-        private Color defaultBackgroundColor;
         protected bool showDialogueTextContents = true;
-        private bool isFirstDraw = true;
+
+        private Color _defaultBackgroundColor;
+        private bool _isFirstDraw = true;
 
         public virtual void Initialize(string nodeName, DialogueGraphView graphView, Vector2 position)
         {
@@ -37,7 +38,7 @@ namespace AdriKat.DialogueSystem.Elements
             AuthorDecorator = new DialogueAuthorData();
             DialogueText = "DialogueText";
 
-            defaultBackgroundColor = new Color(29 / 255f, 29 / 255f, 30 / 255f);
+            _defaultBackgroundColor = new Color(29 / 255f, 29 / 255f, 30 / 255f);
 
             SetPosition(new Rect(position, Vector2.zero));
 
@@ -57,10 +58,9 @@ namespace AdriKat.DialogueSystem.Elements
 
         public virtual void Draw()
         {
-            if (isFirstDraw)
+            if (_isFirstDraw)
             {
-                isFirstDraw = false;
-                Debug.Log("First draw");
+                _isFirstDraw = false;
                 DrawInputPorts();
                 DrawOutputPorts();
                 DrawTitleContainer();
@@ -354,7 +354,7 @@ namespace AdriKat.DialogueSystem.Elements
 
         public void ResetStyle()
         {
-            mainContainer.style.backgroundColor = defaultBackgroundColor;
+            mainContainer.style.backgroundColor = _defaultBackgroundColor;
         }
 
         public bool IsStartingNode()

@@ -10,26 +10,26 @@ namespace AdriKat.DialogueSystem.Inspector
     [CustomEditor(typeof(Dialogue))]
     public class DialogueInspector : Editor
     {
-        private SerializedProperty dialogueContainerProperty;
-        private SerializedProperty dialogueGroupProperty;
-        private SerializedProperty dialogueProperty;
+        private SerializedProperty _dialogueContainerProperty;
+        private SerializedProperty _dialogueGroupProperty;
+        private SerializedProperty _dialogueProperty;
 
-        private SerializedProperty groupedDialogueProperty;
-        private SerializedProperty startingDialogueOnlyProperty;
+        private SerializedProperty _groupedDialogueProperty;
+        private SerializedProperty _startingDialogueOnlyProperty;
 
-        private SerializedProperty selectedDialogueGroupIndexProperty;
-        private SerializedProperty selectedDialogueIndexProperty;
+        private SerializedProperty _selectedDialogueGroupIndexProperty;
+        private SerializedProperty _selectedDialogueIndexProperty;
 
 
         private void OnEnable()
         {
-            dialogueContainerProperty = serializedObject.FindProperty("dialogueContainer");
-            dialogueGroupProperty = serializedObject.FindProperty("dialogueGroup");
-            dialogueProperty = serializedObject.FindProperty("dialogue");
-            groupedDialogueProperty = serializedObject.FindProperty("groupedDialogues");
-            startingDialogueOnlyProperty = serializedObject.FindProperty("startingDialogueOnly");
-            selectedDialogueGroupIndexProperty = serializedObject.FindProperty("selectedDialogueGroupIndex");
-            selectedDialogueIndexProperty = serializedObject.FindProperty("selectedDialogueIndex");
+            _dialogueContainerProperty = serializedObject.FindProperty("_dialogueContainer");
+            _dialogueGroupProperty = serializedObject.FindProperty("_dialogueGroup");
+            _dialogueProperty = serializedObject.FindProperty("_dialogue");
+            _groupedDialogueProperty = serializedObject.FindProperty("_groupedDialogues");
+            _startingDialogueOnlyProperty = serializedObject.FindProperty("_startingDialogueOnly");
+            _selectedDialogueGroupIndexProperty = serializedObject.FindProperty("_selectedDialogueGroupIndex");
+            _selectedDialogueIndexProperty = serializedObject.FindProperty("_selectedDialogueIndex");
         }
 
         public override void OnInspectorGUI()
@@ -39,7 +39,7 @@ namespace AdriKat.DialogueSystem.Inspector
             DrawDialogueContainerArea();
             DialogueInspectorUtility.DrawSpace();
 
-            DialogueContainerSO dialogueContainer = dialogueContainerProperty.objectReferenceValue as DialogueContainerSO;
+            DialogueContainerSO dialogueContainer = _dialogueContainerProperty.objectReferenceValue as DialogueContainerSO;
 
             if (dialogueContainer == null)
             {
@@ -50,8 +50,8 @@ namespace AdriKat.DialogueSystem.Inspector
             DrawFiltersArea();
             DialogueInspectorUtility.DrawSpace();
 
-            bool currentGroupedDialoguesFilter = groupedDialogueProperty.boolValue;
-            bool currentStartingDialoguesOnlyFilter = startingDialogueOnlyProperty.boolValue;
+            bool currentGroupedDialoguesFilter = _groupedDialogueProperty.boolValue;
+            bool currentStartingDialoguesOnlyFilter = _startingDialogueOnlyProperty.boolValue;
 
             List<string> dialogueNames;
             string dialogueFolderPath = $"{DialogueIOUtility.DIALOGUES_SAVE_PATH}/{dialogueContainer.FileName}";
@@ -70,7 +70,7 @@ namespace AdriKat.DialogueSystem.Inspector
                 DrawDialogueGroupArea(dialogueContainer, dialogueGroupNames);
                 DialogueInspectorUtility.DrawSpace();
 
-                DialogueGroupSO dialogueGroup = (DialogueGroupSO)dialogueGroupProperty.objectReferenceValue;
+                DialogueGroupSO dialogueGroup = (DialogueGroupSO)_dialogueGroupProperty.objectReferenceValue;
                 dialogueNames = dialogueContainer.GetGroupedDialogueNames(dialogueGroup, currentStartingDialoguesOnlyFilter);
                 dialogueFolderPath += $"/{DialogueIOUtility.DIALOGUES_GROUPSPACE_FOLDER}/{dialogueGroup.GroupName}/Dialogues";
                 dialogueInfoMessage = "There are no " + (currentStartingDialoguesOnlyFilter ? "starting" : "") + " dialogues in the selected group!";
@@ -98,53 +98,53 @@ namespace AdriKat.DialogueSystem.Inspector
         private void DrawDialogueContainerArea()
         {
             DialogueInspectorUtility.DrawHeader("Dialogue Container");
-            dialogueContainerProperty.DrawPropertyField();
+            _dialogueContainerProperty.DrawPropertyField();
         }
 
         private void DrawFiltersArea()
         {
             DialogueInspectorUtility.DrawHeader("Filters");
-            groupedDialogueProperty.DrawPropertyField();
-            startingDialogueOnlyProperty.DrawPropertyField();
+            _groupedDialogueProperty.DrawPropertyField();
+            _startingDialogueOnlyProperty.DrawPropertyField();
         }
 
         private void DrawDialogueGroupArea(DialogueContainerSO dialogueContainer, List<string> dialogueGroupNames)
         {
             DialogueInspectorUtility.DrawHeader("Dialogue Group");
 
-            int oldSelectedDialogueGroupIndex = selectedDialogueGroupIndexProperty.intValue;
+            int oldSelectedDialogueGroupIndex = _selectedDialogueGroupIndexProperty.intValue;
 
-            DialogueGroupSO oldDialogueGroup = dialogueGroupProperty.objectReferenceValue as DialogueGroupSO;
+            DialogueGroupSO oldDialogueGroup = _dialogueGroupProperty.objectReferenceValue as DialogueGroupSO;
 
             string oldDialogueGroupName = oldDialogueGroup == null ? string.Empty : oldDialogueGroup.name;
 
             UpdateIndexOnDialogueGroupUpdate(
                 dialogueGroupNames,
-                selectedDialogueGroupIndexProperty,
+                _selectedDialogueGroupIndexProperty,
                 oldSelectedDialogueGroupIndex,
                 oldDialogueGroupName,
                 oldDialogueGroup == null);
 
-            selectedDialogueGroupIndexProperty.DrawPopup("Dialogue Group", dialogueGroupNames.ToArray());
-            string selectedDialogueGroupName = dialogueGroupNames[selectedDialogueGroupIndexProperty.intValue];
+            _selectedDialogueGroupIndexProperty.DrawPopup("Dialogue Group", dialogueGroupNames.ToArray());
+            string selectedDialogueGroupName = dialogueGroupNames[_selectedDialogueGroupIndexProperty.intValue];
             DialogueGroupSO selectedDialogueGroup = DialogueIOUtility.LoadAsset<DialogueGroupSO>($"{DialogueIOUtility.DIALOGUES_SAVE_PATH}/{dialogueContainer.FileName}/{DialogueIOUtility.DIALOGUES_GROUPSPACE_FOLDER}/{selectedDialogueGroupName}", selectedDialogueGroupName);
-            dialogueGroupProperty.objectReferenceValue = selectedDialogueGroup;
+            _dialogueGroupProperty.objectReferenceValue = selectedDialogueGroup;
 
-            DialogueInspectorUtility.DrawDisabledFields(() => dialogueGroupProperty.DrawPropertyField());
+            DialogueInspectorUtility.DrawDisabledFields(() => _dialogueGroupProperty.DrawPropertyField());
         }
 
         private void DrawDialogueArea(List<string> dialogueNames, string dialogueFolderPath)
         {
             DialogueInspectorUtility.DrawHeader("Dialogue");
-            int oldSelectedDialogueIndex = selectedDialogueIndexProperty.intValue;
-            DialogueSO oldDialogue = dialogueProperty.objectReferenceValue as DialogueSO;
+            int oldSelectedDialogueIndex = _selectedDialogueIndexProperty.intValue;
+            DialogueSO oldDialogue = _dialogueProperty.objectReferenceValue as DialogueSO;
             string oldDialogueName = oldDialogue == null ? string.Empty : oldDialogue.name;
-            UpdateIndexOnDialogueGroupUpdate(dialogueNames, selectedDialogueIndexProperty, oldSelectedDialogueIndex, oldDialogueName, oldDialogue == null);
-            selectedDialogueIndexProperty.DrawPopup("Dialogue", dialogueNames.ToArray());
-            string selectedDialogueName = dialogueNames[selectedDialogueIndexProperty.intValue];
+            UpdateIndexOnDialogueGroupUpdate(dialogueNames, _selectedDialogueIndexProperty, oldSelectedDialogueIndex, oldDialogueName, oldDialogue == null);
+            _selectedDialogueIndexProperty.DrawPopup("Dialogue", dialogueNames.ToArray());
+            string selectedDialogueName = dialogueNames[_selectedDialogueIndexProperty.intValue];
             DialogueSO selectedDialogue = DialogueIOUtility.LoadAsset<DialogueSO>(dialogueFolderPath, selectedDialogueName);
-            dialogueProperty.objectReferenceValue = selectedDialogue;
-            DialogueInspectorUtility.DrawDisabledFields(() => dialogueProperty.DrawPropertyField());
+            _dialogueProperty.objectReferenceValue = selectedDialogue;
+            DialogueInspectorUtility.DrawDisabledFields(() => _dialogueProperty.DrawPropertyField());
         }
 
         private void StopDrawing(string reason)

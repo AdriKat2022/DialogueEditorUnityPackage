@@ -9,24 +9,24 @@ namespace AdriKat.DialogueSystem.Core
     {
         #region Dialogue Selection Variables (Serialized by Custom Editor)
         // Dialogue Scriptable Object
-        [SerializeField] private DialogueContainerSO dialogueContainer;
-        [SerializeField] private DialogueGroupSO dialogueGroup;
-        [SerializeField] private DialogueSO dialogue;
+        [SerializeField] private DialogueContainerSO _dialogueContainer;
+        [SerializeField] private DialogueGroupSO _dialogueGroup;
+        [SerializeField] private DialogueSO _dialogue;
 
         // Filters
-        [SerializeField] private bool groupedDialogues;
-        [SerializeField] private bool startingDialogueOnly;
+        [SerializeField] private bool _groupedDialogues;
+        [SerializeField] private bool _startingDialogueOnly;
 
         // Indexes
-        [SerializeField] private int selectedDialogueGroupIndex;
-        [SerializeField] private int selectedDialogueIndex;
+        [SerializeField] private int _selectedDialogueGroupIndex;
+        [SerializeField] private int _selectedDialogueIndex;
         #endregion
 
-        private bool firstCall = true;
-        private ExecutableDialogueSO currentDialogue;
+        private bool _firstCall = true;
+        private ExecutableDialogueSO _currentDialogue;
 
-        private int lastDialogueIndex;
-        private List<ExecutableDialogueSO> dialoguesHistory;
+        private int _lastDialogueIndex;
+        private List<ExecutableDialogueSO> _dialoguesHistory;
 
         #region Initialization Methods
         private void Awake()
@@ -37,23 +37,23 @@ namespace AdriKat.DialogueSystem.Core
 
         #region Getters
 
-        public bool IsInitialized() => currentDialogue != null;
+        public bool IsInitialized() => _currentDialogue != null;
 
-        public bool IsStartOfDialogue() => firstCall;
+        public bool IsStartOfDialogue() => _firstCall;
 
-        public bool IsEndOfDialogue() => !firstCall && currentDialogue.Choices.Count == 1 && currentDialogue.Choices[0].NextDialogue == null;
+        public bool IsEndOfDialogue() => !_firstCall && _currentDialogue.Choices.Count == 1 && _currentDialogue.Choices[0].NextDialogue == null;
 
         public bool IsEndOfDialogue(int conditionalChoice)
         {
-            if (currentDialogue.Type == DialogueType.MultipleChoice)
+            if (_currentDialogue.Type == DialogueType.MultipleChoice)
             {
-                return currentDialogue.Choices[conditionalChoice].NextDialogue == null;
+                return _currentDialogue.Choices[conditionalChoice].NextDialogue == null;
             }
 
             return IsEndOfDialogue();
         }
 
-        public bool IsChoiceAvailable() => currentDialogue.Choices.Count > 1;
+        public bool IsChoiceAvailable() => _currentDialogue.Choices.Count > 1;
 
         public List<string> GetCurrentChoices()
         {
@@ -64,7 +64,7 @@ namespace AdriKat.DialogueSystem.Core
             }
 
             List<string> choices = new();
-            foreach (var choice in currentDialogue.Choices)
+            foreach (var choice in _currentDialogue.Choices)
             {
                 choices.Add(choice.Text);
             }
@@ -84,11 +84,11 @@ namespace AdriKat.DialogueSystem.Core
         /// <returns>Returns the dialogue if there is one. Returns null if you reached the end.</returns>
         public ExecutableDialogueSO GetNext(int choice = 0)
         {
-            if (firstCall)
+            if (_firstCall)
             {
                 // First call, return the current dialogue without moving, otherwise it would be skipped.
-                firstCall = false;
-                return currentDialogue;
+                _firstCall = false;
+                return _currentDialogue;
             }
 
             if (IsEndOfDialogue(choice))
@@ -98,7 +98,7 @@ namespace AdriKat.DialogueSystem.Core
 
             MoveNext(choice);
 
-            return currentDialogue;
+            return _currentDialogue;
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace AdriKat.DialogueSystem.Core
         /// </summary>
         public ExecutableDialogueSO GetCurrent()
         {
-            return currentDialogue;
+            return _currentDialogue;
         }
 
         /// <summary>
@@ -118,14 +118,14 @@ namespace AdriKat.DialogueSystem.Core
         public DialogueSO GetBack()
         {
             // If there are no dialogues in the history, return null
-            if (lastDialogueIndex < 0)
+            if (_lastDialogueIndex < 0)
             {
                 return null;
             }
 
             MoveBack();
 
-            return currentDialogue;
+            return _currentDialogue;
         }
         #endregion
 
@@ -137,11 +137,11 @@ namespace AdriKat.DialogueSystem.Core
         /// </summary>
         public void ResetToFirstDialogue()
         {
-            firstCall = true;
-            lastDialogueIndex = -1;
+            _firstCall = true;
+            _lastDialogueIndex = -1;
 
-            dialoguesHistory = new List<ExecutableDialogueSO>();
-            currentDialogue = ResolveConditionalDialogue(dialogue);
+            _dialoguesHistory = new List<ExecutableDialogueSO>();
+            _currentDialogue = ResolveConditionalDialogue(_dialogue);
         }
 
         /// <summary>
@@ -156,28 +156,28 @@ namespace AdriKat.DialogueSystem.Core
                 return;
             }
 
-            if (currentDialogue.Type == DialogueType.MultipleChoice)
+            if (_currentDialogue.Type == DialogueType.MultipleChoice)
             {
                 // Multiple Choice
-                if (choice < 0 || choice >= currentDialogue.Choices.Count)
+                if (choice < 0 || choice >= _currentDialogue.Choices.Count)
                 {
-                    Debug.LogError($"Choice index was invalid! You choose the choice {choice} and there are {currentDialogue.Choices.Count}." +
+                    Debug.LogError($"Choice index was invalid! You choose the choice {choice} and there are {_currentDialogue.Choices.Count}." +
                         (choice < 0 ? "\nAnd no, negative indexes don't count..." : ""));
                     return;
                 }
 
-                dialoguesHistory.Add(currentDialogue);
-                lastDialogueIndex++;
+                _dialoguesHistory.Add(_currentDialogue);
+                _lastDialogueIndex++;
 
-                currentDialogue = ResolveConditionalDialogue(currentDialogue.Choices[choice].NextDialogue);
+                _currentDialogue = ResolveConditionalDialogue(_currentDialogue.Choices[choice].NextDialogue);
             }
             else
             {
                 // Single Choice
-                dialoguesHistory.Add(currentDialogue);
-                lastDialogueIndex++;
+                _dialoguesHistory.Add(_currentDialogue);
+                _lastDialogueIndex++;
 
-                currentDialogue = ResolveConditionalDialogue(currentDialogue.Choices[0].NextDialogue);
+                _currentDialogue = ResolveConditionalDialogue(_currentDialogue.Choices[0].NextDialogue);
             }
         }
 
@@ -186,14 +186,14 @@ namespace AdriKat.DialogueSystem.Core
         /// </summary>
         public void MoveBack()
         {
-            if (lastDialogueIndex < 0)
+            if (_lastDialogueIndex < 0)
             {
                 Debug.LogWarning("There are no dialogues in the history to move back to.");
                 return;
             }
 
-            currentDialogue = dialoguesHistory[lastDialogueIndex];
-            lastDialogueIndex--;
+            _currentDialogue = _dialoguesHistory[_lastDialogueIndex];
+            _lastDialogueIndex--;
         }
         #endregion
 
@@ -204,6 +204,12 @@ namespace AdriKat.DialogueSystem.Core
         /// <returns></returns>
         private ExecutableDialogueSO ResolveConditionalDialogue(DialogueSO dialogue)
         {
+            if (dialogue == null)
+            {
+                Debug.LogError("DialogueSystem: Encountered null dialogue while resolving conditional dialogue.", gameObject);
+                return null;
+            }
+
             if (dialogue is ExecutableDialogueSO executableDialogue)
             {
                 return executableDialogue;

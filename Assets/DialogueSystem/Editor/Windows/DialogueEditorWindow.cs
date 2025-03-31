@@ -9,17 +9,17 @@ namespace AdriKat.DialogueSystem.Utility
 {
     public class DialogueEditorWindow : EditorWindow
     {
-        private DialogueGraphView graphView;
-        private readonly string defaultFileName = "DialogueFileName";
-        private Button saveButton;
+        private static readonly string _defaultFilename = "DialogueFileName";
+        private static TextField _filenameTextField;
 
-        private static TextField fileNameTextField;
-        private static DialogueEditorWindow currentDialogueEditorWindow;
+        private DialogueGraphView _graphView;
+        private Button _saveButton;
+
 
         [MenuItem("Window/Dialogue Editor Window")]
         public static void ShowExample()
         {
-            currentDialogueEditorWindow = GetWindow<DialogueEditorWindow>("Dialogue Editor Window");
+            GetWindow<DialogueEditorWindow>("Dialogue Editor Window");
         }
 
         private void OnEnable()
@@ -29,30 +29,29 @@ namespace AdriKat.DialogueSystem.Utility
             AddStyles();
         }
 
-        public static void UpdateFileName(string fileName)
+        public static void UpdateFileName(string filename)
         {
-            fileNameTextField.value = fileName;
+            _filenameTextField.value = filename;
         }
 
         private void AddToolBar()
         {
             Toolbar toolbar = new();
-            fileNameTextField = DialogueElementUtility.CreateTextField(defaultFileName, "File Name:", callback =>
+            _filenameTextField = DialogueElementUtility.CreateTextField(_defaultFilename, "File Name:", callback =>
             {
-                fileNameTextField.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
+                _filenameTextField.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
             });
 
-            saveButton = DialogueElementUtility.CreateButton("Save", () => Save());
+            _saveButton = DialogueElementUtility.CreateButton("Save", () => Save());
             Button loadButton = DialogueElementUtility.CreateButton("Load", () => Load());
             Button clearButton = DialogueElementUtility.CreateButton("Clear", () => Clear());
 
-            toolbar.Add(fileNameTextField);
-            toolbar.Add(saveButton);
+            toolbar.Add(_filenameTextField);
+            toolbar.Add(_saveButton);
             toolbar.Add(loadButton);
             toolbar.Add(clearButton);
 
-            //toolbar.AddStyleSheets("DialogueToolBarStyles");
-            toolbar.AddStyleSheetsGUIDs("56e71c5ed8a693f4293ce0ee78db317d");
+            toolbar.AddStyleSheets("DialogueToolBarStyles");
             rootVisualElement.Add(toolbar);
         }
 
@@ -60,16 +59,16 @@ namespace AdriKat.DialogueSystem.Utility
         #region Toolbar Methods
         private void Save()
         {
-            if (string.IsNullOrEmpty(fileNameTextField.value))
+            if (string.IsNullOrEmpty(_filenameTextField.value))
             {
                 EditorUtility.DisplayDialog("Invalid file name", "Please enter a valid file name", "Ok");
                 return;
             }
 
             // Check if the file name already exists
-            if (DialogueIOUtility.GraphExists(fileNameTextField.value))
+            if (DialogueIOUtility.GraphExists(_filenameTextField.value))
             {
-                bool overwrite = EditorUtility.DisplayDialog("Overwriting Graph", $"The graph {fileNameTextField.value} already exists.\n" +
+                bool overwrite = EditorUtility.DisplayDialog("Overwriting Graph", $"The graph {_filenameTextField.value} already exists.\n" +
                     $"Do you want to overwrite it and update all its related dialogues?", "Overwrite", "Cancel");
                 if (!overwrite)
                 {
@@ -77,7 +76,7 @@ namespace AdriKat.DialogueSystem.Utility
                 }
             }
 
-            DialogueIOUtility.Initialize(graphView, fileNameTextField.value);
+            DialogueIOUtility.Initialize(_graphView, _filenameTextField.value);
             DialogueIOUtility.Save();
         }
 
@@ -108,38 +107,37 @@ namespace AdriKat.DialogueSystem.Utility
             }
 
             Clear();
-            DialogueIOUtility.Initialize(graphView, Path.GetFileNameWithoutExtension(path));
+            DialogueIOUtility.Initialize(_graphView, Path.GetFileNameWithoutExtension(path));
             DialogueIOUtility.Load();
         }
 
         private void Clear()
         {
-            graphView.ClearGraph();
-            fileNameTextField.value = defaultFileName;
+            _graphView.ClearGraph();
+            _filenameTextField.value = _defaultFilename;
         }
         #endregion
 
         private void AddStyles()
         {
-            //rootVisualElement.AddStyleSheets("DialogueVariables");
-            rootVisualElement.AddStyleSheetsGUIDs("aba5c975eccbb86409b93f173fbcf6ab");
+            rootVisualElement.AddStyleSheets("DialogueVariables");
         }
 
         private void AddGraphView()
         {
-            graphView = new DialogueGraphView(this);
-            graphView.StretchToParentSize();
-            rootVisualElement.Add(graphView);
+            _graphView = new DialogueGraphView(this);
+            _graphView.StretchToParentSize();
+            rootVisualElement.Add(_graphView);
         }
 
         public void EnableSaving()
         {
-            saveButton.SetEnabled(true);
+            _saveButton.SetEnabled(true);
         }
 
         public void DisableSaving()
         {
-            saveButton.SetEnabled(false);
+            _saveButton.SetEnabled(false);
         }
     }
 }

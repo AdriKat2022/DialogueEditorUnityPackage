@@ -13,38 +13,38 @@ namespace AdriKat.DialogueSystem.Graph
 {
     public class DialogueGraphView : GraphView
     {
-        private DialogueEditorWindow editorWindow;
+        private readonly DialogueEditorWindow _editorWindow;
 
-        private SerializableDictionary<string, DialogueNodeErrorData> ungroupedNodes;
-        private SerializableDictionary<string, DialogueGroupErrorData> groups;
-        private SerializableDictionary<Group, SerializableDictionary<string, DialogueNodeErrorData>> groupedNodes;
+        private readonly SerializableDictionary<string, DialogueNodeErrorData> _ungroupedNodes;
+        private readonly SerializableDictionary<string, DialogueGroupErrorData> _groups;
+        private readonly SerializableDictionary<Group, SerializableDictionary<string, DialogueNodeErrorData>> _groupedNodes;
 
-        private int nameErrorAmount = 0;
+        private int _nameErrorAmount = 0;
         public int NameErrorAmount
         {
-            get => nameErrorAmount;
+            get => _nameErrorAmount;
 
             set
             {
-                nameErrorAmount = value;
+                _nameErrorAmount = value;
 
-                if (nameErrorAmount == 0)
+                if (_nameErrorAmount == 0)
                 {
-                    editorWindow.EnableSaving();
+                    _editorWindow.EnableSaving();
                 }
                 else
                 {
-                    editorWindow.DisableSaving();
+                    _editorWindow.DisableSaving();
                 }
             }
         }
 
         public DialogueGraphView(DialogueEditorWindow editorWindow)
         {
-            this.editorWindow = editorWindow;
-            ungroupedNodes = new SerializableDictionary<string, DialogueNodeErrorData>();
-            groupedNodes = new SerializableDictionary<Group, SerializableDictionary<string, DialogueNodeErrorData>>();
-            groups = new SerializableDictionary<string, DialogueGroupErrorData>();
+            _editorWindow = editorWindow;
+            _ungroupedNodes = new SerializableDictionary<string, DialogueNodeErrorData>();
+            _groupedNodes = new SerializableDictionary<Group, SerializableDictionary<string, DialogueNodeErrorData>>();
+            _groups = new SerializableDictionary<string, DialogueGroupErrorData>();
 
             AddManipulators();
             AddGridBackground();
@@ -119,16 +119,16 @@ namespace AdriKat.DialogueSystem.Graph
             string nodeName = node.DialogueName.ToLower();
             node.Group = group;
 
-            if (!groupedNodes.ContainsKey(group))
+            if (!_groupedNodes.ContainsKey(group))
             {
-                groupedNodes.Add(group, new SerializableDictionary<string, DialogueNodeErrorData>());
+                _groupedNodes.Add(group, new SerializableDictionary<string, DialogueNodeErrorData>());
             }
 
-            if (!groupedNodes[group].ContainsKey(nodeName))
+            if (!_groupedNodes[group].ContainsKey(nodeName))
             {
                 DialogueNodeErrorData nodeErrorData = new();
                 nodeErrorData.Nodes.Add(node);
-                groupedNodes[group].Add(nodeName, nodeErrorData);
+                _groupedNodes[group].Add(nodeName, nodeErrorData);
                 node.ResetStyle();
                 return;
             }
@@ -136,13 +136,13 @@ namespace AdriKat.DialogueSystem.Graph
             // If the name already exists, add the node to the list of nodes with the same name (there will be a duplicate)
             NameErrorAmount++;
 
-            List<DialogueNode> groupedNodesList = groupedNodes[group][nodeName].Nodes;
+            List<DialogueNode> groupedNodesList = _groupedNodes[group][nodeName].Nodes;
             groupedNodesList.Add(node);
-            Color errorColor = groupedNodes[group][nodeName].ErrorData.Color;
+            Color errorColor = _groupedNodes[group][nodeName].ErrorData.Color;
             node.SetErrorStyle(errorColor);
             if (groupedNodesList.Count > 1)
             {
-                foreach (DialogueNode n in groupedNodes[group][nodeName].Nodes)
+                foreach (DialogueNode n in _groupedNodes[group][nodeName].Nodes)
                 {
                     n.SetErrorStyle(errorColor);
                 }
@@ -157,7 +157,7 @@ namespace AdriKat.DialogueSystem.Graph
         {
             string nodeName = node.DialogueName.ToLower();
             node.Group = null;
-            List<DialogueNode> groupedNodesList = groupedNodes[group][nodeName].Nodes;
+            List<DialogueNode> groupedNodesList = _groupedNodes[group][nodeName].Nodes;
             groupedNodesList.Remove(node);
 
             node.ResetStyle();
@@ -165,12 +165,12 @@ namespace AdriKat.DialogueSystem.Graph
             if (groupedNodesList.Count == 0)
             {
                 // Node was not in an error state (no other nodes with the same name)
-                groupedNodes[group].Remove(nodeName);
+                _groupedNodes[group].Remove(nodeName);
 
                 // Remove the group if there are no nodes in it
-                if (groupedNodes[group].Count == 0)
+                if (_groupedNodes[group].Count == 0)
                 {
-                    groupedNodes.Remove(group);
+                    _groupedNodes.Remove(group);
                 }
             }
             else
@@ -190,12 +190,12 @@ namespace AdriKat.DialogueSystem.Graph
         {
             string nodeName = node.DialogueName.ToLower();
 
-            if (!ungroupedNodes.ContainsKey(nodeName))
+            if (!_ungroupedNodes.ContainsKey(nodeName))
             {
                 // If the name does not exist, create a new list with the node
                 DialogueNodeErrorData errorData = new DialogueNodeErrorData();
                 errorData.Nodes.Add(node);
-                ungroupedNodes.Add(nodeName, errorData);
+                _ungroupedNodes.Add(nodeName, errorData);
                 node.ResetStyle();
                 return;
             }
@@ -204,14 +204,14 @@ namespace AdriKat.DialogueSystem.Graph
             // This is used to show the error message when there are nodes with the same name
             NameErrorAmount++;
 
-            List<DialogueNode> ungroupedNodesList = ungroupedNodes[nodeName].Nodes;
+            List<DialogueNode> ungroupedNodesList = _ungroupedNodes[nodeName].Nodes;
             ungroupedNodesList.Add(node);
-            node.SetErrorStyle(ungroupedNodes[nodeName].ErrorData.Color);
-            if (ungroupedNodes[nodeName].Nodes.Count > 1)
+            node.SetErrorStyle(_ungroupedNodes[nodeName].ErrorData.Color);
+            if (_ungroupedNodes[nodeName].Nodes.Count > 1)
             {
-                foreach (DialogueNode n in ungroupedNodes[nodeName].Nodes)
+                foreach (DialogueNode n in _ungroupedNodes[nodeName].Nodes)
                 {
-                    n.SetErrorStyle(ungroupedNodes[nodeName].ErrorData.Color);
+                    n.SetErrorStyle(_ungroupedNodes[nodeName].ErrorData.Color);
                 }
             }
             else
@@ -224,17 +224,17 @@ namespace AdriKat.DialogueSystem.Graph
         {
             string nodeName = node.DialogueName.ToLower();
 
-            if (!ungroupedNodes.ContainsKey(nodeName))
+            if (!_ungroupedNodes.ContainsKey(nodeName))
             {
                 Debug.LogError("Tried to remove a non-existing node.");
                 return;
             }
 
-            List<DialogueNode> ungroupedNodesList = ungroupedNodes[nodeName].Nodes;
+            List<DialogueNode> ungroupedNodesList = _ungroupedNodes[nodeName].Nodes;
             ungroupedNodesList.Remove(node);
             if (ungroupedNodesList.Count == 0)
             {
-                ungroupedNodes.Remove(nodeName);
+                _ungroupedNodes.Remove(nodeName);
             }
             else
             {
@@ -279,20 +279,20 @@ namespace AdriKat.DialogueSystem.Graph
         private void AddGroup(DialogueGroup group)
         {
             string groupName = group.title.ToLower();
-            if (!groups.ContainsKey(groupName))
+            if (!_groups.ContainsKey(groupName))
             {
                 DialogueGroupErrorData groupErrorData = new();
                 groupErrorData.Groups.Add(group);
-                groups.Add(groupName, groupErrorData);
+                _groups.Add(groupName, groupErrorData);
                 return;
             }
 
             // The name already exists
             NameErrorAmount++;
 
-            List<DialogueGroup> groupList = groups[groupName].Groups;
+            List<DialogueGroup> groupList = _groups[groupName].Groups;
             groupList.Add(group);
-            Color errorColor = groups[groupName].ErrorData.Color;
+            Color errorColor = _groups[groupName].ErrorData.Color;
             group.SetErrorStyle(errorColor);
 
             if (groupList.Count > 1)
@@ -311,7 +311,7 @@ namespace AdriKat.DialogueSystem.Graph
         private void RemoveGroup(DialogueGroup group)
         {
             string oldGroupName = group.OldTitle.ToLower();
-            List<DialogueGroup> groupsList = groups[oldGroupName].Groups;
+            List<DialogueGroup> groupsList = _groups[oldGroupName].Groups;
             groupsList.Remove(group);
             group.ResetStyle();
 
@@ -328,7 +328,7 @@ namespace AdriKat.DialogueSystem.Graph
 
             if (groupsList.Count == 0)
             {
-                groups.Remove(oldGroupName);
+                _groups.Remove(oldGroupName);
             }
         }
         #endregion
@@ -550,8 +550,7 @@ namespace AdriKat.DialogueSystem.Graph
         #region Styles and Background
         private void AddStyles()
         {
-            //this.AddStyleSheets("DialogueGraphViewStyles", "DialogueNodeStyles");
-            this.AddStyleSheetsGUIDs("5c98439f5b29b8b41bd4e0e844c7387c", "e8be37637e95f6347a19881e9f06499c");
+            this.AddStyleSheets("DialogueGraphViewStyles", "DialogueNodeStyles");
         }
 
         private void AddGridBackground()
@@ -568,16 +567,16 @@ namespace AdriKat.DialogueSystem.Graph
         {
             graphElements.ForEach((element) => RemoveElement(element));
 
-            groups.Clear();
-            groupedNodes.Clear();
-            ungroupedNodes.Clear();
+            _groups.Clear();
+            _groupedNodes.Clear();
+            _ungroupedNodes.Clear();
 
             NameErrorAmount = 0;
         }
 
         internal void Repaint()
         {
-            editorWindow.Repaint();
+            _editorWindow.Repaint();
         }
         #endregion
     }
